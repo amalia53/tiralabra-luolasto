@@ -1,1 +1,5 @@
 # Luolastogeneraattori
+
+## Viikkoraportit
+
+## Dokumentaatio
