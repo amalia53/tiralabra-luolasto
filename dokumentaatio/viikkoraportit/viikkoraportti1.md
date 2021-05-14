@@ -1,21 +1,13 @@
 # Viikkoraportti 1
-Tunteja käytetty: 3
+Tunteja käytetty: 2,5
 
 ### Mitä tein?
 
-Tutustuin luolastogeneraattorimahdollisuuksiin ja cellular automatan käyttöön luolastogeneraattorissa. Loin gradle-projektin.
+Tutustuin luolastogeneraattorimahdollisuuksiin ja cellular automatan käyttöön luolastogeneraattorissa. Loin repositorion ja gradle-projektin. Tein README:n ja alustavan määrittelydokumentin. Linkit lisätty määrittelydokumenttiin ja viikkoraportitin README:hen.
 
-### Edistyminen
+### Mitä opin ja vaikeudet
 
-Tein alustavan määrittelydokumentin.
-
-### Mitä opin?
-
-Erilaisista mahdollisuuksista luoda luolastogeneraattori. 
-
-### Vaikeudet
-
-En ehtinyt miettiä aika- ja tilavaativuuksia algoritmille.
+Erilaisista mahdollisuuksista luoda luolastogeneraattori. En ehtinyt miettiä aika- ja tilavaativuuksia algoritmille.
 
 ### Mitä seuraavaksi?
 
