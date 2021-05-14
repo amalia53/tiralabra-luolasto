@@ -1,6 +1,7 @@
 # Määrittelydokumentti
 
 Dokumentaation kieli: Suomi
+
 Opinto-ohjelma: Tietojenkäsittelytieteen kandidaatti TKT
 
 Luolageneraattorin on tarkoitus pystyä luomaan kaksiulotteisia luolia ja käytäviä annetun kokoiseen ruudukkoon. Luolat yhdistyvät toisiinsa käytävillä ja mistä vain luolasta pääsee jotain reittiä pitkin toiseen luolaan, eli luolasto on yhtenäinen. Liikkua voi neljään suuntaan, eli ylös, alas, vasemmalle tai oikealle, mikäli vastassa ei ole seinää. 
