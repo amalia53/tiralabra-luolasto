@@ -3,7 +3,10 @@ Tunteja käytetty: 2,5
 
 ### Mitä tein?
 
-Tutustuin luolastogeneraattorimahdollisuuksiin ja cellular automatan käyttöön luolastogeneraattorissa. Loin repositorion ja gradle-projektin. Tein README:n ja alustavan määrittelydokumentin. Linkit lisätty määrittelydokumenttiin ja viikkoraportitin README:hen.
+- Tutustuin luolastogeneraattorimahdollisuuksiin ja cellular automatan käyttöön luolastogeneraattorissa
+- Loin repositorion ja gradle-projektin. 
+- Tein README:n ja alustavan määrittelydokumentin. 
+- Linkit lisätty määrittelydokumenttiin ja viikkoraportitin README:hen.
 
 ### Mitä opin ja vaikeudet
 
