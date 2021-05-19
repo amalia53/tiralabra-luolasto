@@ -15,5 +15,6 @@ public class TekstiUI {
 		 int n = lukija.nextInt();
 		 //Luolasto luolasto = LuolastoGeneraattori.luoLuolasto(n);
 		 //System.out.println(luolasto);
+		 System.out.println("Hei hei!");
 	 }
 }
