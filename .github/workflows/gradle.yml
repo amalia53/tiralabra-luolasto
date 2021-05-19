@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./LuolastoGeneraattori
+        working-directory: ./CaveGenerator
 
     steps:
     - uses: actions/checkout@v2
