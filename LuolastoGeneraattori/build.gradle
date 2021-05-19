@@ -16,7 +16,7 @@ jacocoTestReport {
             fileTree(dir: it, exclude: ['sovellus/**'])
         }))
     }
-
+}
 
 check.dependsOn jacocoTestReport
 
