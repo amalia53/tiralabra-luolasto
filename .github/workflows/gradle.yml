@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./CaveGenerator
+        working-directory: ./LuolastoGeneraattori
 
     steps:
     - uses: actions/checkout@v2
@@ -22,7 +22,3 @@ jobs:
       run: chmod +x gradlew
     - name: Test with Gradle
       run: ./gradlew test
-    - name: Code coverage report
-      run: ./gradlew jacocoTestReport
-    - name: Data to codecov
-      run: bash <(curl -s https://codecov.io/bash)
