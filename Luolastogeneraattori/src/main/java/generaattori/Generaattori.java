@@ -15,7 +15,7 @@ public class Generaattori {
 	 * Generoidaan luolasto. Alustetaan luolasto ja parannetaan sitä
 	 * kierroksia-luokkamuuttujan määrittämän määrän kertaa.
 	 * 
-	 * @param luolaston koko
+	 * @param koko		luolaston koko
 	 *
 	 * @return luolasto-matriisi
 	 */
@@ -55,7 +55,7 @@ public class Generaattori {
 	 * luokkamuuttujan luolaRaja arvo. Mikäli ruutu on luola, muutetaan se seinäksi,
 	 * jos laskettu seinien määrä on suurempu kuin luokkamuuttujan seinaRaja arvo
 	 * 
-	 * @param paranneltava luolasto-matriisi
+	 * @param luolasto		paranneltava luolasto-matriisi
 	 *
 	 * @return paranneltu luolasto-matriisi
 	 */
@@ -80,7 +80,9 @@ public class Generaattori {
 	 * kaikki kahdeksan ruutua, jotka ovat ruudun naapureina. Ei käsitellä itse
 	 * ruutua. Mikäli naapuriruutu on seinä, lisätään laskuriin seinä.
 	 * 
-	 * @param paranneltava luolasto-matriisi, ruudun x ja y -koordinaatit
+	 * @param luolasto		paranneltava luolasto-matriisi
+	 * @param x				ruudun x-koordinaatti
+	 * @param y 			ruudun y-koordinaatti
 	 *
 	 * @return seinien määrä annetun ruudun naapureissa
 	 */

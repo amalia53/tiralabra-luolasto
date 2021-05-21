@@ -3,6 +3,7 @@ plugins {
     id 'jacoco'
     id 'checkstyle'
     id 'application'
+    id 'java'
 }
 
 mainClassName = 'ohjelma.Main'
@@ -12,6 +13,10 @@ jacocoTestReport {
         xml.enabled = true
         html.enabled = true
     }
+}
+
+javadoc {
+    source = sourceSets.main.allJava
 }
 
 check.dependsOn jacocoTestReport

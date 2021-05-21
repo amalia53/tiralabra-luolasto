@@ -10,7 +10,7 @@ public class TekstiUI {
 	/*
 	 * Luodaan käyttöliittymä syötteenä annetulla lukijalla
 	 * 
-	 * @param käyttäjän syötteitä lukeva lukija
+	 * @param lukija käyttäjän syötteitä lukeva lukija
 	 */
 
 	public TekstiUI(Scanner lukija) {
@@ -58,7 +58,7 @@ public class TekstiUI {
 	/*
 	 * Tulostetaan parametrina annettu matriisi. Seinät näytetään tähtinä, luolat tyhjinä ja luolasto on rajattu viivoin.
 	 * 
-	 * @param tulostettava luolasto-matriisi
+	 * @param luolasto tulostettava luolasto-matriisi
 	 */
 
 	public void tulosta(boolean[][] luolasto) {
