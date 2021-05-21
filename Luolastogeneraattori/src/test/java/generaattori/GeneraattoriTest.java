@@ -1,7 +1,6 @@
 package generaattori;
 
 import org.junit.*;
-import generaattori.Generaattori;
 
 public class GeneraattoriTest {
 	

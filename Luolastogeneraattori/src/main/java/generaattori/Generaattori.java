@@ -11,7 +11,7 @@ public class Generaattori {
 	private int seinaRaja = 4;
 	private int kierroksia = 8;
 
-	/*
+	/**
 	 * Generoidaan luolasto. Alustetaan luolasto ja parannetaan sitä
 	 * kierroksia-luokkamuuttujan määrittämän määrän kertaa.
 	 * 
@@ -101,10 +101,10 @@ public class Generaattori {
 		}
 		return laskuri;
 	}
-	
+
 	/*
-	 * Tutkitaan onko syötteenä annettu ruutu seinä.
-	 * Tulkitaan luolaston ulkopuolella olevat ruudut seinäksi.
+	 * Tutkitaan onko syötteenä annettu ruutu seinä. Tulkitaan luolaston
+	 * ulkopuolella olevat ruudut seinäksi.
 	 * 
 	 * @param paranneltava luolasto-matriisi, ruudun x ja y -koordinaatit
 	 *
