@@ -13,6 +13,10 @@ Tunteja käytetty: 12
 
 ### Mitä opin ja vaikeudet
 
-Gradlen kanssa tuli ongelmia uudelleennimeämisen jälkeen, joten jouduin säätämään gitin ja gradlen kanssa, jotta pääsin virheestä eroon. Codecovin kofaus onnistui ensin, mutta koodi ei päivittynyt ja nyt codecov väittää, ettei committeja ole ja badge sanoo unknown. Jacoco-raportti toimii kuitenkin. 
+Gradlen kanssa tuli ongelmia uudelleennimeämisen jälkeen, joten jouduin säätämään gitin ja gradlen kanssa, jotta pääsin virheestä eroon. Codecovin kofaus onnistui ensin, mutta koodi ei päivittynyt ja nyt codecov väittää, ettei committeja ole ja badge sanoo unknown. Jacoco-raportti toimii kuitenkin. Tämä viikko meni konfliktien ja konfigurointien kanssa painiessa, itse algoritmin kirjoitus sujui melko ongelmitta.
 
 ### Mitä seuraavaksi?
+- Suunnittelen minkä toisen algoritmin valitsen tehtäväksi
+- Parantelen tämän hetkistä algoritmia niin, ettei synny irrallisia luolia, jotta luolasto on yhtenäinen
+- -Lisää testejä (injektio) 
+- Selvitän Codecovin ongelman, jotta testikattavuus saadaan näkyviin.
