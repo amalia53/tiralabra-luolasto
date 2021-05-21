@@ -5,7 +5,7 @@ Tunteja käytetty: 12
 
 - Checkstylen konfigurointi
 - Jacocon konfigurointi
-    - codecov ei toimi tällähetkellä
+    - codecov ei toimi jostain syystä tällä hetkellä
 - Javadoc
 - Luotiin tekstikäyttöliittymä, joka kysyy kokoa ja tulostaa luolaston
 - Luotiin cellular automataan perustuva algoritmi, joka generoi luolia
