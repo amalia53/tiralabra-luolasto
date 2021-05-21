@@ -4,12 +4,12 @@ import java.util.Random;
 
 public class Generaattori {
 	
-	boolean[][] luolasto;
+	private boolean[][] luolasto;
 	
-	float mahdolllisuusOllaSeina = 0.45f;
-	int kuolemaRaja = 4;
-	int syntyRaja = 4;
-	int kierroksia = 8;
+	private float mahdolllisuusOllaSeina = 0.45f;
+	private int luolaRaja = 4;
+	private int seinaRaja = 4;
+	private int kierroksia = 8;
 	
 	public void generoi(int koko) {
 		luolasto = new boolean[koko][koko];
@@ -34,18 +34,18 @@ public class Generaattori {
 		boolean[][] uusi = new boolean[luolasto.length][luolasto.length];
 		for (int x = 0; x < luolasto.length; x++) {
 			for (int y = 0; y < luolasto.length; y++) {
-				int naapureita = laskeElavatNaapurit(x, y);
+				int naapureita = laskeNaapuritJotkaSeinia(luolasto, x, y);
 				if (luolasto[x][y]) {
-					uusi[x][y] = naapureita < kuolemaRaja ? false : true;
+					uusi[x][y] = naapureita < luolaRaja ? false : true;
 				} else {
-					uusi[x][y] = naapureita > syntyRaja ? true : false;
+					uusi[x][y] = naapureita > seinaRaja ? true : false;
 				}
 			}
 		}
 		return uusi;
 	}
 	
-	public int laskeElavatNaapurit(int x, int y) {
+	public int laskeNaapuritJotkaSeinia(boolean[][] luolasto, int x, int y) {
 		int laskuri = 0;
 		for (int x_i = -1; x_i < 2; x_i++) {
 			for (int y_i = -1; y_i < 2; y_i++) {
@@ -54,7 +54,7 @@ public class Generaattori {
 				if (x_i == 0 && y_i == 0) {
 					continue;
 				}
-				if (onSeina(x_naapuri, y_naapuri)) {
+				if (onSeina(luolasto, x_naapuri, y_naapuri)) {
 					laskuri++;
 				}
 			}
@@ -62,7 +62,7 @@ public class Generaattori {
 		return laskuri;
 	}
 	
-	public boolean onSeina(int x, int y) {
+	public boolean onSeina(boolean[][] luolasto, int x, int y) {
 		return x < 0 || y < 0 || x >= luolasto.length || y >= luolasto.length || luolasto[x][y];
 	}
 	
