@@ -21,11 +21,44 @@ public class GeneraattoriTest {
 	}
 	
 	@Test
-	public void laskeNaapuritJotkaSeiniaPalauttaaOikeinKunNurkka() {
+	public void laskeNaapuritJotkaSeiniaPalauttaaOikeinKunYlaNurkka() {
 		int seinat = gen.laskeNaapuritJotkaSeinia(testiLuolasto, 0, 0);
 		Assert.assertEquals(seinat, 6);
 	}
 	
+	@Test
+	public void laskeNaapuritJotkaSeiniaPalauttaaOikeinKunAlaNurkka() {
+		int seinat = gen.laskeNaapuritJotkaSeinia(testiLuolasto, 4, 4);
+		Assert.assertEquals(seinat, 5);
+	}
+	
+	@Test
+	public void parannaMuuttaaLuolaksiJosNaapureistaAlle4OnSeinia() {
+		Assert.assertEquals(testiLuolasto[3][2], true);
+		testiLuolasto = gen.paranna(testiLuolasto);
+		Assert.assertEquals(testiLuolasto[3][2], false);
+	}
+	
+	@Test
+	public void parannaMuuttaaSeinaksiJosNaapureistaYli4OnSeinia() {
+		Assert.assertEquals(testiLuolasto[0][0], false);
+		testiLuolasto = gen.paranna(testiLuolasto);
+		Assert.assertEquals(testiLuolasto[0][0], true);
+	}
+	
+	@Test
+	public void parannaEiMuutaLuolaksiJosNaapureistaAlle4OnSeinia() {
+		Assert.assertEquals(testiLuolasto[0][2], true);
+		testiLuolasto = gen.paranna(testiLuolasto);
+		Assert.assertEquals(testiLuolasto[0][2], true);
+	}
+	
+	@Test
+	public void parannaEiMuutaSeinaksiJosNaapureistaYli4OnSeinia() {
+		Assert.assertEquals(testiLuolasto[1][1], false);
+		testiLuolasto = gen.paranna(testiLuolasto);
+		Assert.assertEquals(testiLuolasto[1][1], false);
+	}
 
 	public void luoTestiLuolasto() {
 		testiLuolasto = new boolean[5][5];

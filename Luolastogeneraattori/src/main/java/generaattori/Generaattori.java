@@ -13,13 +13,13 @@ public class Generaattori {
 	
 	public void generoi(int koko) {
 		luolasto = new boolean[koko][koko];
-		alustaLuolasto();
+		alustaLuolasto(luolasto);
 		for (int i = 0; i < kierroksia; i++) {
-			luolasto = paranna();
+			luolasto = paranna(luolasto);
 		}
 	}
 	
-	public void alustaLuolasto() {
+	public void alustaLuolasto(boolean[][] luolasto) {
 		Random r = new Random();
 		for (int x = 0; x < luolasto.length; x++) {
 			for (int y = 0; y < luolasto.length; y++) {
@@ -30,15 +30,15 @@ public class Generaattori {
 		}
 	}
 	
-	public boolean[][] paranna() {
+	public boolean[][] paranna(boolean[][] luolasto) {
 		boolean[][] uusi = new boolean[luolasto.length][luolasto.length];
 		for (int x = 0; x < luolasto.length; x++) {
 			for (int y = 0; y < luolasto.length; y++) {
-				int naapureita = laskeNaapuritJotkaSeinia(luolasto, x, y);
+				int seiniaNaapureina = laskeNaapuritJotkaSeinia(luolasto, x, y);
 				if (luolasto[x][y]) {
-					uusi[x][y] = naapureita < luolaRaja ? false : true;
+					uusi[x][y] = seiniaNaapureina < luolaRaja ? false : true;
 				} else {
-					uusi[x][y] = naapureita > seinaRaja ? true : false;
+					uusi[x][y] = seiniaNaapureina > seinaRaja ? true : false;
 				}
 			}
 		}
