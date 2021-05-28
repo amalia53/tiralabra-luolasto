@@ -4,6 +4,7 @@
 
 ![GitHub Actions](https://github.com/amalia53/tiralabra-luolasto/workflows/Java%20CI%20with%20Gradle/badge.svg)
 [![codecov](https://codecov.io/gh/amalia53/tiralabra-luolasto/branch/main/graph/badge.svg?token=c86YCY66yn)](https://codecov.io/gh/amalia53/tiralabra-luolasto)
+[![Checkstyle](https://github.com/amalia53/tiralabra-luolasto/actions/workflows/checkstyle.yml/badge.svg)](https://github.com/amalia53/tiralabra-luolasto/actions/workflows/checkstyle.yml)
 
 ## Viikkoraportit
 
