@@ -92,14 +92,14 @@ public class Generaattori {
 
 	public int laskeNaapuritJotkaSeinia(boolean[][] luolasto, int x, int y) {
 		int laskuri = 0;
-		for (int x_i = -1; x_i < 2; x_i++) {
-			for (int y_i = -1; y_i < 2; y_i++) {
-				int x_naapuri = x + x_i;
-				int y_naapuri = y + y_i;
-				if (x_i == 0 && y_i == 0) {
+		for (int i = -1; i < 2; i++) {
+			for (int j = -1; j < 2; j++) {
+				int xNaapuri = x + i;
+				int yNaapuri = y + j;
+				if (i == 0 && j == 0) {
 					continue;
 				}
-				if (onSeina(luolasto, x_naapuri, y_naapuri)) {
+				if (onSeina(luolasto, xNaapuri, yNaapuri)) {
 					laskuri++;
 				}
 			}
@@ -124,19 +124,28 @@ public class Generaattori {
 		return x < 0 || y < 0 || x >= luolasto.length || y >= luolasto.length || luolasto[x][y];
 	}
 
+	/*
+	 * Tehdään luolastosta yhtenäinen poistamalla tai yhdistämällä toisiinsa
+	 * mahdolliset erilliset luolat
+	 * 
+	 * @param luolasto yhdistettävä luolasto-matriisi
+	 *
+	 * @return yhdistetty luolasto-matriisi
+	 */
+
 	public boolean[][] teeYhtenaiseksi(boolean[][] luolasto) {
 		tulosta(luolasto);
 		int luolanKoko;
 		int luolia = 0;
-		boolean[][] vierailtu = new boolean[luolasto.length][luolasto.length];		
+		boolean[][] vierailtu = new boolean[luolasto.length][luolasto.length];
 		while (true) {
-			int x_alku = haeAloitusX(luolasto, vierailtu);
-			if (x_alku == -1) {
+			int xAlku = haeAloitusX(luolasto, vierailtu);
+			if (xAlku == -1) {
 				break;
 			}
-			int y_alku = haeAloitusY(luolasto, vierailtu);
+			int yAlku = haeAloitusY(luolasto, vierailtu);
 			boolean[][] vierailtuKierroksella = new boolean[luolasto.length][luolasto.length];
-			luolanKoko = tarkistaYhtenaisyys(x_alku, y_alku, luolasto, vierailtuKierroksella);
+			luolanKoko = etsiYhtenainenLuolaJaKoko(xAlku, yAlku, luolasto, vierailtuKierroksella);
 			luolia++;
 			lisaaVierailtu(luolasto, vierailtu, vierailtuKierroksella);
 			System.out.println();
@@ -155,31 +164,19 @@ public class Generaattori {
 		return luolasto;
 	}
 
-	public boolean[][] poistaLuola(boolean[][] luolasto, boolean[][] vierailtuKierroksella) {
-		for (int x = 0; x < luolasto.length; x++) {
-			for (int y = 0; y < luolasto.length; y++) {
-				if (!luolasto[x][y] && vierailtuKierroksella[x][y]) {
-					luolasto[x][y] = true;
-				}
-			}
-		}
-		return luolasto;
-	}
 	
-	public boolean[][] yhdistaLuola(boolean[][] luolasto, boolean[][] vierailtuKierroksella) {
-		return luolasto;
-	}
-	
-	public boolean[][] lisaaVierailtu(boolean[][] luolasto, boolean[][] vierailtu, boolean[][] vierailtuKierroksella) {
-		for (int x = 0; x < luolasto.length; x++) {
-			for (int y = 0; y < luolasto.length; y++) {
-				if (!luolasto[x][y] && vierailtuKierroksella[x][y]) {
-					vierailtu[x][y] = true;
-				}
-			}
-		}
-		return vierailtu;
-	}
+	/*
+	 * Haetaan X-koordinantti, josta löytyy vielä vierailemattoman luolan
+	 * aloistuspiste
+	 * 
+	 * @param luolasto
+	 * 
+	 * @param vierailtu kaikki tähän mennessä löydetyt luolaston osat
+	 *
+	 * @return mikäli löytyy vierailemattomia luolaston osia, palauttaa ensimmäisen
+	 * vierailemattoman luolan osan X-koordinantin. Mikäli kaikki luolaston osat on
+	 * löydetty, palauttaa -1
+	 */
 
 	public int haeAloitusX(boolean[][] luolasto, boolean[][] vierailtu) {
 		for (int x = 0; x < luolasto.length; x++) {
@@ -192,6 +189,20 @@ public class Generaattori {
 		return -1;
 	}
 
+	/*
+	 * Haetaan Y-koordinantti, josta löytyy vielä vierailemattoman luolan
+	 * aloituspiste
+	 * 
+	 * @param luolasto
+	 * 
+	 * @param vierailtu kaikki tähän mennessä löydetyt luolaston osat
+	 *
+	 * @return mikäli löytyy vierailemattomia luolaston osia, palauttaa ensimmäisen
+	 * vierailemattoman luolan osan Y-koordinantin. Mikäli kaikki luolaston osat on
+	 * löydetty, palauttaa -1. Tähän ei pitäisi koskaan joutua Y-koordinantin
+	 * kohdalla, sillä looppi katkaistaan, mikäli X:n haku palauttaa -1
+	 */
+
 	public int haeAloitusY(boolean[][] luolasto, boolean[][] vierailtu) {
 		for (int x = 0; x < luolasto.length; x++) {
 			for (int y = 0; y < luolasto.length; y++) {
@@ -203,7 +214,22 @@ public class Generaattori {
 		return -1;
 	}
 
-	public int tarkistaYhtenaisyys(int x, int y, boolean[][] luolasto, boolean[][] vierailtu) {
+	/*
+	 * Syvyyshaku, joka palauttaa löydetyn luolan koon ja merkitsee
+	 * vierailtu-matriisiin kierroksella vieraillut luolan osat
+	 * 
+	 * @param x X-koordinantti, josta haku alkaa
+	 * 
+	 * @param y Y-koordinantti, josta haku alkaa
+	 * 
+	 * @param luolasto
+	 * 
+	 * @param vierailtu aluksi tyhjä matriisi, johon täytetään vieraillut luolan osat
+	 *
+	 * @return haun aikana löydetyn luolan koko
+	 */
+
+	public int etsiYhtenainenLuolaJaKoko(int x, int y, boolean[][] luolasto, boolean[][] vierailtu) {
 		if (onSeina(luolasto, x, y) || vierailtu[x][y]) {
 			return 0;
 		}
@@ -220,12 +246,72 @@ public class Generaattori {
 //		if (!onSeina(luolasto, x - 1, y) && !vierailtu[x - 1][y]) {
 //			tarkistaYhtenaisyys(x - 1, y, luolasto, vierailtu, koko);
 //		}
-		return 1 + tarkistaYhtenaisyys(x, y + 1, luolasto, vierailtu)
-				+ tarkistaYhtenaisyys(x, y - 1, luolasto, vierailtu)
-				+ tarkistaYhtenaisyys(x + 1, y, luolasto, vierailtu)
-				+ tarkistaYhtenaisyys(x - 1, y, luolasto, vierailtu);
+		return 1 + etsiYhtenainenLuolaJaKoko(x, y + 1, luolasto, vierailtu)
+				+ etsiYhtenainenLuolaJaKoko(x, y - 1, luolasto, vierailtu)
+				+ etsiYhtenainenLuolaJaKoko(x + 1, y, luolasto, vierailtu)
+				+ etsiYhtenainenLuolaJaKoko(x - 1, y, luolasto, vierailtu);
 	}
 
+	/*
+	 * Päivitetään vierailtu-matriisiin kierroksella löydetty luola
+	 * 
+	 * @param luolasto
+	 * 
+	 * @param vierailtu kaikki täät kierrosta ennen löydetyt luolaston osat
+	 * 
+	 * @param vierailtuKierroksella tällä kierroksella löydetty luolaston osa
+	 *
+	 * @return vierailtu-matriisi, jossa näkyy kaikki tähän asti vieraillut osat
+	 * luolastosta
+	 */
+
+	public boolean[][] lisaaVierailtu(boolean[][] luolasto, boolean[][] vierailtu, boolean[][] vierailtuKierroksella) {
+		for (int x = 0; x < luolasto.length; x++) {
+			for (int y = 0; y < luolasto.length; y++) {
+				if (!luolasto[x][y] && vierailtuKierroksella[x][y]) {
+					vierailtu[x][y] = true;
+				}
+			}
+		}
+		return vierailtu;
+	}
+
+	
+	/*
+	 * Poistetaan liian pieni erillinen luola
+	 * 
+	 * @param luolasto
+	 * 
+	 * @param vierailtuKierroksella poistettava luola-matriisi
+	 *
+	 * @return luolasto-matriisi, josta poistettu luola
+	 */
+
+	public boolean[][] poistaLuola(boolean[][] luolasto, boolean[][] vierailtuKierroksella) {
+		for (int x = 0; x < luolasto.length; x++) {
+			for (int y = 0; y < luolasto.length; y++) {
+				if (!luolasto[x][y] && vierailtuKierroksella[x][y]) {
+					luolasto[x][y] = true;
+				}
+			}
+		}
+		return luolasto;
+	}
+
+	/*
+	 * Yhdistetään suurempi erillinen luola toiseen suurempaan luolaan
+	 * 
+	 * @param luolasto
+	 * 
+	 * @param vierailtuKierroksella yhdistettävä luola-matriisi
+	 *
+	 * @return luolasto-matriisi, jossa luola on yhdistetty
+	 */
+	
+	public boolean[][] yhdistaLuola(boolean[][] luolasto, boolean[][] vierailtuKierroksella) {
+		return luolasto;
+	}
+	
 	public void tulosta(boolean[][] luolasto) {
 		System.out.println();
 		for (int i = 0; i < luolasto.length + 2; i++) {
