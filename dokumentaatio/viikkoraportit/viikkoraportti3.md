@@ -15,7 +15,7 @@ Tunteja käytetty: 12
 - Kirjoitin testit muulle kuin yhdistämiselle ja reitin etsimiselle
         - testit puuttuvat myös alustamisesta ja generoinnista viime viikolta
 - Tutkin muita algoritmeja luolan generointiin ja päivitin määrittelydokumenttia
-    -Valitsin toiseksi algortmiksi BSP-puuhun perustuvan generaattorin
+    - Valitsin toiseksi algortmiksi BSP-puuhun perustuvan generaattorin
 ### Mitä opin ja vaikeudet
 
 Suuremmilla kartan koko -syötteillä tulee stackoverflow-virhe, koska syvyyshaku tekee liian monta rekursiivista kutsua. Mahdollisesti voisi siirtää ehtoja jo ennen kutsua. En tiedä lähdinkö kovin järjevästi luomaan luolaston yhdistämistä, en vielä ole keksinyt, miten lähden löytämästäni lähimmästä luolaston pisteestä takaisin yhdistettävään luolaan muuttaen seinät tunneliksi.
