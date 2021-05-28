@@ -91,6 +91,49 @@ public class GeneraattoriTest {
 		boolean[][] vierailtu = new boolean[5][5];	
 		Assert.assertEquals(gen.etsiYhtenainenLuolaJaKoko(0, 0, testiLuolastoEiYhtenainen, vierailtu), 11);
 	}
+	
+	@Test
+	public void haeAloitusXAntaaVierailemattomanLuolanXKoordinaatin() {
+		boolean[][] vierailtu = new boolean[5][5];	
+		Assert.assertEquals(gen.haeAloitusX(testiLuolastoEiYhtenainen, vierailtu),0);
+		vierailtu[0][0] = true;
+		vierailtu[0][1] = true;
+		vierailtu[0][2] = true;
+		vierailtu[0][3] = true;
+		vierailtu[0][4] = true;
+		vierailtu[1][3] = true;
+		vierailtu[1][4] = true;
+		vierailtu[2][3] = true;
+		vierailtu[2][4] = true;
+		vierailtu[3][3] = true;
+		vierailtu[3][4] = true;
+		Assert.assertEquals(gen.haeAloitusX(testiLuolastoEiYhtenainen, vierailtu),2);
+	}
+	
+	@Test
+	public void haeAloitusYAntaaVierailemattomanLuolanYKoordinaatin() {
+		boolean[][] vierailtu = new boolean[5][5];	
+		Assert.assertEquals(gen.haeAloitusY(testiLuolastoEiYhtenainen, vierailtu),0);
+		vierailtu[0][0] = true;
+		vierailtu[0][1] = true;
+		vierailtu[0][2] = true;
+		vierailtu[0][3] = true;
+		vierailtu[0][4] = true;
+		vierailtu[1][3] = true;
+		vierailtu[1][4] = true;
+		vierailtu[2][3] = true;
+		vierailtu[2][4] = true;
+		vierailtu[3][3] = true;
+		vierailtu[3][4] = true;
+		Assert.assertEquals(gen.haeAloitusY(testiLuolastoEiYhtenainen, vierailtu),1);
+	}
+	
+	@Test
+	public void teeYhtenaiseksiLoytaaPienenErillisenLuolanJaPoistaaSen() {
+		Assert.assertEquals(testiLuolastoEiYhtenainen[3][1], false);
+		gen.teeYhtenaiseksi(testiLuolastoEiYhtenainen);
+		Assert.assertEquals(testiLuolastoEiYhtenainen[3][1], true);
+	}
 
 	public void luoTestiLuolasto() {
 		testiLuolasto = new boolean[5][5];
