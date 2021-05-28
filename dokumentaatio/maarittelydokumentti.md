@@ -8,11 +8,15 @@ Luolageneraattorin on tarkoitus pystyä luomaan kaksiulotteisia luolia ja käyt�
 
 ### Tietorakenteet
 
-Luolastokartta tallennetaan matriisiin. 
+Cellular Automata -algoritmissa luolastokartta tallennetaan matriisiin. 
+
+Toisessa algoritmissa luon luolista BSP-puun.
 
 ### Algoritmit
 
-Suunnittelen käyttäväni Cellular Automata -algoritmia generaatorin luontiin. Valitsin tämän algoritmin, sillä se vaikuttaisi luovan kiinnostavan oloisia luolastoja. Luolaston yhtenäisyyden tarkistamiseksi, ajattelin käyttää leveyshakua.
+Käytetään Cellular Automata -algoritmia toisen generaattorin luontiin. Valitsin tämän algoritmin, sillä se vaikuttaisi luovan kiinnostavan oloisia, luonnollisen näköisiä luolastoja. Luolaston yhtenäisyyden tarkistamiseksi, ajattelin käyttää syvyyshakua. Isot erilliset luolastot yhdistetään etsimällä lyhin polku Bellmanin ja Fordin algoritmia mukaillen. 
+
+Toiseen generaattoriin käytän luola ja käytävä -tyylisempää luolastoa luovaa BSP-puuhun perustuvaa algoritmia. 
 
 ### Syötteet
 
@@ -22,3 +26,4 @@ Ohjelma saa syötteenään luolaston koon eli alueen, jolle luolia ja käytävi�
 
 [http://roguebasin.roguelikedevelopment.org/index.php?title=Cellular_Automata_Method_for_Generating_Random_Cave-Like_Levels](http://roguebasin.roguelikedevelopment.org/index.php?title=Cellular_Automata_Method_for_Generating_Random_Cave-Like_Levels)
 [https://gamedevelopment.tutsplus.com/tutorials/generate-random-cave-levels-using-cellular-automata--gamedev-9664](https://gamedevelopment.tutsplus.com/tutorials/generate-random-cave-levels-using-cellular-automata--gamedev-9664)
+[https://eskerda.com/bsp-dungeon-generation/](https://eskerda.com/bsp-dungeon-generation/)
