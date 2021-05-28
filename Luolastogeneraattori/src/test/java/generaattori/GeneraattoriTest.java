@@ -6,11 +6,13 @@ public class GeneraattoriTest {
 	
 	Generaattori gen;
 	boolean[][] testiLuolasto;
+	boolean[][] testiLuolastoEiYhtenainen;
 
 	@Before
 	public void setUp() {
 		gen = new Generaattori();
 		luoTestiLuolasto();
+		luoTestiLuolastoEiYhtenainen();
 	}
 	
 	@Test
@@ -58,6 +60,37 @@ public class GeneraattoriTest {
 		testiLuolasto = gen.paranna(testiLuolasto);
 		Assert.assertEquals(testiLuolasto[1][1], false);
 	}
+	
+	@Test
+	public void lisaaVierailtuLisaaUudellaKierroksellaLoytyneenLuolanMatriisiin() {
+		boolean[][] vierailtuKierroksella = new boolean[5][5];
+		boolean[][] vierailtu = new boolean[5][5];		
+		vierailtuKierroksella[2][1] = true;
+		vierailtuKierroksella[3][1] = true;
+		vierailtuKierroksella[4][0] = true;
+		vierailtuKierroksella[4][1] = true;
+		Assert.assertEquals(vierailtu[2][1], false);
+		gen.lisaaVierailtu(testiLuolastoEiYhtenainen, vierailtu, vierailtuKierroksella);
+		Assert.assertEquals(vierailtu[2][1], true);
+	}
+	
+	@Test
+	public void poistaLuolaPoistaaLiianPienenErillisenLuolan() {
+		boolean[][] vierailtuKierroksella = new boolean[5][5];
+		vierailtuKierroksella[2][1] = true;
+		vierailtuKierroksella[3][1] = true;
+		vierailtuKierroksella[4][0] = true;
+		vierailtuKierroksella[4][1] = true;
+		Assert.assertEquals(testiLuolastoEiYhtenainen[3][1], false);
+		gen.poistaLuola(testiLuolastoEiYhtenainen, vierailtuKierroksella);
+		Assert.assertEquals(testiLuolastoEiYhtenainen[3][1], true);
+	}
+	
+	@Test
+	public void etsiYhtenainenLuolaJaKokoPalauttaaYhtenaisenLuolanKoon() {
+		boolean[][] vierailtu = new boolean[5][5];	
+		Assert.assertEquals(gen.etsiYhtenainenLuolaJaKoko(0, 0, testiLuolastoEiYhtenainen, vierailtu), 11);
+	}
 
 	public void luoTestiLuolasto() {
 		testiLuolasto = new boolean[5][5];
@@ -73,5 +106,19 @@ public class GeneraattoriTest {
 		testiLuolasto[3][1] = true;
 		testiLuolasto[3][2] = true;
 		testiLuolasto[4][0] = true;
+	}
+	
+	public void luoTestiLuolastoEiYhtenainen() {
+		testiLuolastoEiYhtenainen = new boolean[5][5];
+		testiLuolastoEiYhtenainen[1][0] = true;
+		testiLuolastoEiYhtenainen[1][1] = true;
+		testiLuolastoEiYhtenainen[1][2] = true;
+		testiLuolastoEiYhtenainen[2][0] = true;
+		testiLuolastoEiYhtenainen[2][2] = true;
+		testiLuolastoEiYhtenainen[3][0] = true;
+		testiLuolastoEiYhtenainen[3][2] = true;
+		testiLuolastoEiYhtenainen[4][2] = true;
+		testiLuolastoEiYhtenainen[4][3] = true;
+		testiLuolastoEiYhtenainen[4][4] = true;
 	}
 }
