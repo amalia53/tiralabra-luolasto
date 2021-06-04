@@ -1,5 +1,5 @@
 # Viikkoraportti 4
-Tunteja käytetty: 0.15
+Tunteja käytetty: 0.10
 
 ### Mitä tein?
 
