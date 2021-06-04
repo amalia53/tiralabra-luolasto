@@ -14,6 +14,8 @@
 
 [Viikkoraportti 3](https://github.com/amalia53/tiralabra-luolasto/blob/main/dokumentaatio/viikkoraportit/viikkoraportti3.md)
 
+[Viikkoraportti 4](https://github.com/amalia53/tiralabra-luolasto/blob/main/dokumentaatio/viikkoraportit/viikkoraportti4.md)
+
 ## Dokumentaatio
 
 [Määrittelydokumentti](https://github.com/amalia53/tiralabra-luolasto/blob/main/dokumentaatio/maarittelydokumentti.md)
