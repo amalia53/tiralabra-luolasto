@@ -150,10 +150,10 @@ public class CAGeneraattori {
 				poistaLuola(luolasto, vierailtuKierroksella);
 			} else {
 				isojaLuolia++;
-				if (isojaLuolia > 1) {
+//				if (isojaLuolia > 1) {
 //					System.out.println("Yhdistetään");
 //					yhdistaLuola(luolasto, vierailtu, vierailtuKierroksella, xAlku, yAlku);
-				}
+//				}
 			}
 			lisaaVierailtu(luolasto, vierailtu, vierailtuKierroksella);
 		}
@@ -300,7 +300,7 @@ public class CAGeneraattori {
 				if (!vierailtuKierroksella[i][j]) {
 					etaisyys[i][j] = 0;
 					//tarvitaan aina oma etaisyystaulukko, ei voi käyttää samaa per piste
-					//also nyt alkaa olla jo nii monta sisäistä for loopia, huhhuh
+					//also nyt alkaa olla jo todellakin liian monta sisäistä for loopia
 					//tee oma metodi tosta whilesta, jossa annetaan aina uusi etaisyys matriksi, joka sitten tallennetaan vaikka listaan
 					while (true) {
 						muutos = false;
