@@ -8,7 +8,8 @@ Tunteja käytetty: 8
   - ei vielä tunneleita luolien välille
 - Yritin korjata luolien yhdistämistä Cellular automata -algoritissa, mutta ongelma ei vielä ratkennut
 - Javadoc uudelle koodille
-- Loin testaus- ja toteutusdokumentit, mutten ehtinyt niitä vielä aloittamaan
+- Loin testaus- ja toteutusdokumentit
+  - toteutusdokumentista aloitettu rakenteen selitystä
     
 ### Mitä opin ja vaikeudet
 
@@ -23,9 +24,9 @@ otettaisiin satunnaisia, jolloin osa jäisi isommiksi. En ehtinyt kirjottamaan t
 ### Mitä seuraavaksi?
 
 - Testit ajantasalle
-- Dokumentoinnin aloitus
-- BSP-algoritmin arvojen viilaus / jakaminen satunnaisesti, jotta luolastosta tulisi kiinnostavampi
-- Käytävien luonti luolien väliin
+- Dokumentointia
+- Käytävien luonti luolien väliin BSP -algoritmissa
 - Cellular automata -algoritmin luolastojen yhdistäminen
 - Oman Random -luokan luominen
   - molemmat algoritmit tarvitsevat random-luokkaa, joka arpoo tiettyjen arvojen sisältä satunnaisen numeron
+- BSP-algoritmin arvojen viilaus / jakaminen satunnaisesti, jotta luolastosta tulisi kiinnostavampi
