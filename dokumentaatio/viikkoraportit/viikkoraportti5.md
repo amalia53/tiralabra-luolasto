@@ -6,6 +6,9 @@ Tunteja käytetty: 8
 - BSP-puuhun perustuvan algoritmin aloitus
   - luo puun ja luolat
   - ei vielä tunneleita luolien välille
+- Yritin korjata luolien yhdistämistä Cellular automata -algoritissa, mutta ongelma ei vielä ratkennut
+- Javadoc uudelle koodille
+- Loin testaus- ja toteutusdokumentit, mutten ehtinyt niitä vielä aloittamaan
     
 ### Mitä opin ja vaikeudet
 
@@ -20,6 +23,7 @@ otettaisiin satunnaisia, jolloin osa jäisi isommiksi. En ehtinyt kirjottamaan t
 ### Mitä seuraavaksi?
 
 - Testit ajantasalle
+- Dokumentoinnin aloitus
 - BSP-algoritmin arvojen viilaus / jakaminen satunnaisesti, jotta luolastosta tulisi kiinnostavampi
 - Käytävien luonti luolien väliin
 - Cellular automata -algoritmin luolastojen yhdistäminen
