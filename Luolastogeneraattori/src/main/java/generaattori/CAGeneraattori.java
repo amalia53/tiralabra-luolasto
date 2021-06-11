@@ -2,7 +2,7 @@ package generaattori;
 
 import java.util.Random;
 
-public class Generaattori {
+public class CAGeneraattori {
 
 	private boolean[][] luolasto;
 
@@ -146,13 +146,13 @@ public class Generaattori {
 			boolean[][] vierailtuKierroksella = new boolean[luolasto.length][luolasto.length];
 			luolanKoko = etsiYhtenainenLuolaJaKoko(xAlku, yAlku, luolasto, vierailtuKierroksella);
 			if (luolanKoko < 1.5 * luolasto.length) {
-				System.out.println("Poistetaan");
+//				System.out.println("Poistetaan");
 				poistaLuola(luolasto, vierailtuKierroksella);
 			} else {
 				isojaLuolia++;
 				if (isojaLuolia > 1) {
-					System.out.println("Yhdistetään");
-					yhdistaLuola(luolasto, vierailtu, vierailtuKierroksella, xAlku, yAlku);
+//					System.out.println("Yhdistetään");
+//					yhdistaLuola(luolasto, vierailtu, vierailtuKierroksella, xAlku, yAlku);
 				}
 			}
 			lisaaVierailtu(luolasto, vierailtu, vierailtuKierroksella);
@@ -288,18 +288,35 @@ public class Generaattori {
 		// niiden tietoja. Miten pois?
 		int[][] etaisyys = new int[luolasto.length][luolasto.length];
 		boolean muutos;
-		while (true) {
-			muutos = false;
-			for (int x = 0; x < luolasto.length; x++) {
-				for (int y = 0; y < luolasto.length; y++) {
-					muutos = etsiLyhinReitti(luolasto, etaisyys, vierailtuKierroksella, x + 1, y, etaisyys[x][y]);
-					muutos = etsiLyhinReitti(luolasto, etaisyys, vierailtuKierroksella, x - 1, y, etaisyys[x][y]);
-					muutos = etsiLyhinReitti(luolasto, etaisyys, vierailtuKierroksella, x, y + 1, etaisyys[x][y]);
-					muutos = etsiLyhinReitti(luolasto, etaisyys, vierailtuKierroksella, x, y - 1, etaisyys[x][y]);
-				}
+		//Etsitään jokaisesta yhdistettävän luolan pisteestä erikseen lyhin reitti
+		//Tarkistetaan mikä lopulta lyhin
+		for (int x = 0; x < etaisyys.length; x++) {
+			for (int y = 0; y < luolasto.length; y++) {
+				etaisyys[x][y] = 100000;
 			}
-			if (!muutos) {
-				break;
+		}
+		for (int i = 0; i < etaisyys.length; i++) {
+			for (int j = 0; j < luolasto.length; j++) {
+				if (!vierailtuKierroksella[i][j]) {
+					etaisyys[i][j] = 0;
+					//tarvitaan aina oma etaisyystaulukko, ei voi käyttää samaa per piste
+					//also nyt alkaa olla jo nii monta sisäistä for loopia, huhhuh
+					//tee oma metodi tosta whilesta, jossa annetaan aina uusi etaisyys matriksi, joka sitten tallennetaan vaikka listaan
+					while (true) {
+						muutos = false;
+						for (int x = 0; x < luolasto.length; x++) {
+							for (int y = 0; y < luolasto.length; y++) {
+								muutos = etsiLyhinReitti(luolasto, etaisyys, vierailtuKierroksella, x + 1, y, etaisyys[x][y]);
+								muutos = etsiLyhinReitti(luolasto, etaisyys, vierailtuKierroksella, x - 1, y, etaisyys[x][y]);
+								muutos = etsiLyhinReitti(luolasto, etaisyys, vierailtuKierroksella, x, y + 1, etaisyys[x][y]);
+								muutos = etsiLyhinReitti(luolasto, etaisyys, vierailtuKierroksella, x, y - 1, etaisyys[x][y]);
+							}
+						}
+						if (!muutos) {
+							break;
+						}
+					}
+				}
 			}
 		}
 		return luoTunneli(luolasto, etaisyys);
@@ -366,6 +383,9 @@ public class Generaattori {
 		int pienimmanY = 0;
 		for (int x = 0; x < luolasto.length; x++) {
 			for (int y = 0; y < luolasto.length; y++) {
+				if (etaisyys[x][y] == 100000) {
+					System.out.print("*,");
+				}
 				System.out.print(etaisyys[x][y] + ",");
 				if (etaisyys[x][y] < pieninEtaisyys && etaisyys[x][y] != 0 && !luolasto[x][y]) {
 					pieninEtaisyys = etaisyys[x][y];
@@ -402,5 +422,29 @@ public class Generaattori {
 			}
 		}
 		return vierailtu;
+	}
+	
+
+	public void tulosta(boolean[][] luolasto) {
+		System.out.println();
+		for (int i = 0; i < luolasto.length + 2; i++) {
+			System.out.print("-");
+		}
+		for (int x = 0; x < luolasto.length; x++) {
+			System.out.println();
+			System.out.print("|");
+			for (int y = 0; y < luolasto.length; y++) {
+				if (luolasto[x][y]) {
+					System.out.print("*");
+				} else {
+					System.out.print(" ");
+				}
+			}
+			System.out.print("|");
+		}
+		System.out.println();
+		for (int i = 0; i < luolasto.length + 2; i++) {
+			System.out.print("-");
+		}
 	}
 }

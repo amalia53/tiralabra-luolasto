@@ -1,7 +1,9 @@
 package ui;
 
 import java.util.Scanner;
-import generaattori.Generaattori;
+
+import generaattori.BSPGeneraattori;
+import generaattori.CAGeneraattori;
 
 public class TekstiUI {
 
@@ -24,9 +26,16 @@ public class TekstiUI {
 
 	public void kaynnista() {
 		int koko = kysyKoko();
-		Generaattori gen = new Generaattori();
-		boolean[][] luolasto = gen.generoi(koko);
-		tulosta(luolasto);
+		CAGeneraattori ca = new CAGeneraattori();
+		BSPGeneraattori bsp = new BSPGeneraattori();
+		boolean[][] luolastoCA = ca.generoi(koko);
+		boolean[][] luolastoBSP = bsp.generoi(koko);
+		tulosta(luolastoCA);
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		tulosta(luolastoBSP);
+
 	}
 
 	/*

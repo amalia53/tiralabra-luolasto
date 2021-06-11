@@ -2,15 +2,15 @@ package generaattori;
 
 import org.junit.*;
 
-public class GeneraattoriTest {
+public class CAGeneraattoriTest {
 	
-	Generaattori gen;
+	CAGeneraattori gen;
 	boolean[][] testiLuolasto;
 	boolean[][] testiLuolastoEiYhtenainen;
 
 	@Before
 	public void setUp() {
-		gen = new Generaattori();
+		gen = new CAGeneraattori();
 		luoTestiLuolasto();
 		luoTestiLuolastoEiYhtenainen();
 	}
