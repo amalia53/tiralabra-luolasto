@@ -29,8 +29,8 @@ public class BSPGeneraattori {
 	public void alustaLuolasto(Luola luola) {
 		boolean onnistui = luola.jaaAlue();
 		if (onnistui) {
-			alustaLuolasto(luola.vasen);
-			alustaLuolasto(luola.oikea);
+			alustaLuolasto(luola.getVasen());
+			alustaLuolasto(luola.getOikea());
 		}
 	}
 	
@@ -42,9 +42,9 @@ public class BSPGeneraattori {
 	 */
 
 	public void luoLuolasto(Luola luola) {
-		if (luola.vasen != null) {
-			luoLuolasto(luola.vasen);
-			luoLuolasto(luola.oikea);
+		if (luola.getVasen() != null) {
+			luoLuolasto(luola.getVasen());
+			luoLuolasto(luola.getOikea());
 		} else {
 			luolasto = luola.luoLuola(luolasto);
 		}

@@ -4,11 +4,19 @@ import java.util.Random;
 
 public class Luola {
 
-	Random random = new Random();
-	int minKoko;
-	int korkeus, leveys;
-	int x, y;
-	Luola vasen, oikea;
+	private Random random = new Random();
+	private int minKoko;
+	private int korkeus, leveys;
+	private int x, y;
+	private Luola vasen, oikea;
+
+	public Luola getVasen() {
+		return vasen;
+	}
+
+	public Luola getOikea() {
+		return oikea;
+	}
 
 	public Luola(int x, int y, int korkeus, int leveys, int minKoko) {
 		this.x = x;
