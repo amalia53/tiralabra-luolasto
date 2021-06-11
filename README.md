@@ -19,3 +19,9 @@
 ## Dokumentaatio
 
 [Määrittelydokumentti](https://github.com/amalia53/tiralabra-luolasto/blob/main/dokumentaatio/maarittelydokumentti.md)
+
+[Toteutusdokumentti](https://github.com/amalia53/tiralabra-luolasto/blob/main/dokumentaatio/toteutusdokumentti.md)
+
+[Testausdokumentti](https://github.com/amalia53/tiralabra-luolasto/blob/main/dokumentaatio/testausdokumentti.md)
+
+
