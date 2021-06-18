@@ -9,6 +9,7 @@ Tunteja käytetty: 16
 - Loin tietorakenteet Keko, Lista, Koordinaatti, Etäisyys ja Satunnainen
   - Oma Satunnainen float, joka toimisi todennäköisyytenä CA:n kanssa ei tuota yhtä hyvää kuin Random, joten en ottanut sitä käyttöön
 - BSP-algoritmiin yritin tehdä labyrinttimaisempia käytäviä, mutta en saanut toimimaan järkevästi
+- Javadoc
     
 ### Mitä opin ja vaikeudet
 
