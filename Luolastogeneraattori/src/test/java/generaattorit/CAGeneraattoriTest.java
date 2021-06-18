@@ -1,6 +1,8 @@
-package generaattori;
+package generaattorit;
 
 import org.junit.*;
+
+import generaattorit.CAGeneraattori;
 
 public class CAGeneraattoriTest {
 	
@@ -93,9 +95,9 @@ public class CAGeneraattoriTest {
 	}
 	
 	@Test
-	public void haeAloitusXAntaaVierailemattomanLuolanXKoordinaatin() {
+	public void haeAloitusAntaaVierailemattomanLuolanXKoordinaatin() {
 		boolean[][] vierailtu = new boolean[5][5];	
-		Assert.assertEquals(gen.haeAloitusX(testiLuolastoEiYhtenainen, vierailtu),0);
+		Assert.assertEquals(gen.haeAloitus(testiLuolastoEiYhtenainen, vierailtu).getX(),0);
 		vierailtu[0][0] = true;
 		vierailtu[0][1] = true;
 		vierailtu[0][2] = true;
@@ -107,13 +109,13 @@ public class CAGeneraattoriTest {
 		vierailtu[2][4] = true;
 		vierailtu[3][3] = true;
 		vierailtu[3][4] = true;
-		Assert.assertEquals(gen.haeAloitusX(testiLuolastoEiYhtenainen, vierailtu),2);
+		Assert.assertEquals(gen.haeAloitus(testiLuolastoEiYhtenainen, vierailtu).getX(),2);
 	}
 	
 	@Test
 	public void haeAloitusYAntaaVierailemattomanLuolanYKoordinaatin() {
 		boolean[][] vierailtu = new boolean[5][5];	
-		Assert.assertEquals(gen.haeAloitusY(testiLuolastoEiYhtenainen, vierailtu),0);
+		Assert.assertEquals(gen.haeAloitus(testiLuolastoEiYhtenainen, vierailtu).getY(),0);
 		vierailtu[0][0] = true;
 		vierailtu[0][1] = true;
 		vierailtu[0][2] = true;
@@ -125,7 +127,7 @@ public class CAGeneraattoriTest {
 		vierailtu[2][4] = true;
 		vierailtu[3][3] = true;
 		vierailtu[3][4] = true;
-		Assert.assertEquals(gen.haeAloitusY(testiLuolastoEiYhtenainen, vierailtu),1);
+		Assert.assertEquals(gen.haeAloitus(testiLuolastoEiYhtenainen, vierailtu).getY(),1);
 	}
 	
 	@Test

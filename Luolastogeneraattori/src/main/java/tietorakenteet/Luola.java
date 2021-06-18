@@ -1,22 +1,12 @@
-package generaattori;
-
-import java.util.Random;
+package tietorakenteet;
 
 public class Luola {
 
-	private Random random = new Random();
+	private Satunnainen satunnainen = new Satunnainen();
 	private int minKoko;
 	private int korkeus, leveys;
 	private int x, y;
 	private Luola vasen, oikea;
-
-	public Luola getVasen() {
-		return vasen;
-	}
-
-	public Luola getOikea() {
-		return oikea;
-	}
 
 	public Luola(int x, int y, int korkeus, int leveys, int minKoko) {
 		this.x = x;
@@ -25,8 +15,24 @@ public class Luola {
 		this.leveys = leveys;
 		this.minKoko = minKoko;
 	}
+	
+	public Luola getVasen() {
+		return vasen;
+	}
 
-	/*
+	public Luola getOikea() {
+		return oikea;
+	}
+	
+	public int getX() {
+		return x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	/**
 	 * Jakaa luola-alueen kahteen pienempään luola-alueeseen, mikäli luola-alue ei
 	 * ole jo tarpeeksi pieni. Satunnaisesti jakaa joko vaakasuunnassa tai
 	 * pystysuunnassa satunnaisen kokoisiksi alueiksi.
@@ -38,7 +44,7 @@ public class Luola {
 	public boolean jaaAlue() {
 		boolean vaakataso;
 		if (leveys / 2 >= minKoko || korkeus / 2 >= minKoko) {
-			vaakataso = random.nextBoolean();
+			vaakataso = satunnainen.totuusarvo();
 			if (leveys / 2 < minKoko) {
 				vaakataso = true;
 			}
@@ -53,7 +59,7 @@ public class Luola {
 		if (pituus - minKoko - minKoko == 0) {
 			leikkaus = minKoko;
 		} else {
-			leikkaus = random.nextInt(pituus - minKoko - minKoko) + minKoko;
+			leikkaus = satunnainen.kokonaislukuValilta(minKoko, pituus);
 		}
 		if (vaakataso) {
 			vasen = new Luola(x, y, leikkaus, leveys, minKoko);
@@ -65,7 +71,7 @@ public class Luola {
 		return true;
 	}
 
-	/*
+	/**
 	 * Luo luola-alueen sisään mahtuvan satunnaisen kokoisen luolan satunnaiseen kohtaan aluetta. Lisää luodun luolan annettuun luolastoon.
 	 *
 	 * @param luolasto
@@ -78,14 +84,12 @@ public class Luola {
 		int minKorkeus = this.leveys / 3;
 		int maxLeveys = this.leveys - 1;
 		int maxKorkeus = this.korkeus - 1;
-		int leveys = random.nextInt(maxLeveys - minLeveys) + minLeveys;
-		int korkeus = random.nextInt(maxKorkeus - minKorkeus) + minKorkeus;
-		int alkuX = this.x + random.nextInt(this.leveys - leveys);
-		int alkuY = this.y + random.nextInt(this.korkeus - korkeus);
+		int leveys = satunnainen.kokonaislukuValilta(minLeveys, maxLeveys);
+		int korkeus = satunnainen.kokonaislukuValilta(minKorkeus, maxKorkeus);
+		int alkuX = this.x + satunnainen.kokonaisluku(this.leveys - leveys);
+		int alkuY = this.y + satunnainen.kokonaisluku(this.korkeus - korkeus);
 		for (int x = this.x; x < this.x + this.leveys; x++) {
 			for (int y = this.y; y < this.y + this.korkeus; y++) {
-				int loppuX = alkuX + leveys;
-				int loppuY = alkuY + korkeus;
 				if (x < alkuX || x >= alkuX + leveys || y < alkuY || y >= alkuY + korkeus) {
 					luolasto[x][y] = true;
 				}

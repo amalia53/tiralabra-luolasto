@@ -1,12 +1,18 @@
-package generaattori;
+package generaattorit;
 
 import java.util.Random;
+
+import tietorakenteet.Etaisyys;
+import tietorakenteet.Keko;
+import tietorakenteet.Koordinantti;
+import tietorakenteet.Lista;
+import tietorakenteet.Satunnainen;
 
 public class CAGeneraattori {
 
 	private boolean[][] luolasto;
 
-	private float mahdolllisuusOllaSeina = 0.45f;
+	private float mahdollisuusOllaSeina = 0.45f;
 	private int luolaRaja = 4;
 	private int seinaRaja = 4;
 	private int kierroksia = 8;
@@ -30,7 +36,7 @@ public class CAGeneraattori {
 		return luolasto;
 	}
 
-	/*
+	/**
 	 * Alustetaan luolasto. Aluksi luolaston kaikki boolean-arvot ovat false eli
 	 * luolasto on vain luolaa. Metodissa lisätään seinä matriisin ruutuun
 	 * luokkamuuttujassa mahdollisuusOllaSeina määritetyllä todennäköisyydellä.
@@ -38,17 +44,19 @@ public class CAGeneraattori {
 	 */
 
 	public void alustaLuolasto() {
-		Random r = new Random();
+		Satunnainen satunnainen = new Satunnainen();
+		Random random = new Random();
 		for (int x = 0; x < luolasto.length; x++) {
 			for (int y = 0; y < luolasto.length; y++) {
-				if (r.nextFloat() < this.mahdolllisuusOllaSeina) {
+				// if (satunnainen.todennakoisyys() < this.mahdollisuusOllaSeina) {
+				if (random.nextFloat() < this.mahdollisuusOllaSeina) {
 					luolasto[x][y] = true;
 				}
 			}
 		}
 	}
 
-	/*
+	/**
 	 * Parannetaan luolastoa. Luodaan uusi matriisi, johon paranneltu luolasto
 	 * tallennetaan. Käydään läpi parannettava luolasto. Lasketaan jokaiselle
 	 * ruudulle, kuinka moni sen naapureista on seinä. Mikäli ruutu on seinä,
@@ -76,16 +84,16 @@ public class CAGeneraattori {
 		return uusi;
 	}
 
-	/*
+	/**
 	 * Lasketaan parametrina annetun ruudun naapurit, jotka ovat seiniä Käydään läpi
 	 * kaikki kahdeksan ruutua, jotka ovat ruudun naapureina. Ei käsitellä itse
 	 * ruutua. Mikäli naapuriruutu on seinä, lisätään laskuriin seinä.
 	 * 
 	 * @param luolasto paranneltava luolasto-matriisi
 	 * 
-	 * @param x ruudun x-koordinaatti
+	 * @param x        ruudun x-koordinaatti
 	 * 
-	 * @param y ruudun y-koordinaatti
+	 * @param y        ruudun y-koordinaatti
 	 *
 	 * @return seinien määrä annetun ruudun naapureissa
 	 */
@@ -124,7 +132,7 @@ public class CAGeneraattori {
 		return x < 0 || y < 0 || x >= luolasto.length || y >= luolasto.length || luolasto[x][y];
 	}
 
-	/*
+	/**
 	 * Tehdään luolastosta yhtenäinen poistamalla tai yhdistämällä toisiinsa
 	 * mahdolliset erilliset luolat
 	 * 
@@ -138,30 +146,27 @@ public class CAGeneraattori {
 		int isojaLuolia = 0;
 		boolean[][] vierailtu = new boolean[luolasto.length][luolasto.length];
 		while (true) {
-			int xAlku = haeAloitusX(luolasto, vierailtu);
-			if (xAlku == -1) {
+			Koordinantti aloitus = haeAloitus(luolasto, vierailtu);
+			if (aloitus == null) {
 				break;
 			}
-			int yAlku = haeAloitusY(luolasto, vierailtu);
 			boolean[][] vierailtuKierroksella = new boolean[luolasto.length][luolasto.length];
-			luolanKoko = etsiYhtenainenLuolaJaKoko(xAlku, yAlku, luolasto, vierailtuKierroksella);
+			luolanKoko = etsiYhtenainenLuolaJaKoko(aloitus.getX(), aloitus.getY(), luolasto, vierailtuKierroksella);
 			if (luolanKoko < 1.5 * luolasto.length) {
-//				System.out.println("Poistetaan");
 				poistaLuola(luolasto, vierailtuKierroksella);
 			} else {
 				isojaLuolia++;
-//				if (isojaLuolia > 1) {
-//					System.out.println("Yhdistetään");
-//					yhdistaLuola(luolasto, vierailtu, vierailtuKierroksella, xAlku, yAlku);
-//				}
+				if (isojaLuolia > 1) {
+					yhdista(luolasto, haeAloitus(luolasto, vierailtuKierroksella), vierailtuKierroksella);
+				}
 			}
 			lisaaVierailtu(luolasto, vierailtu, vierailtuKierroksella);
 		}
 		return luolasto;
 	}
 
-	/*
-	 * Haetaan X-koordinantti, josta löytyy vielä vierailemattoman luolan
+	/**
+	 * Haetaan koordinantti, josta löytyy vielä vierailemattoman luolan
 	 * aloistuspiste
 	 * 
 	 * @param luolasto
@@ -169,44 +174,19 @@ public class CAGeneraattori {
 	 * @param vierailtu kaikki tähän mennessä löydetyt luolaston osat
 	 *
 	 * @return mikäli löytyy vierailemattomia luolaston osia, palauttaa ensimmäisen
-	 * vierailemattoman luolan osan X-koordinantin. Mikäli kaikki luolaston osat on
-	 * löydetty, palauttaa -1
+	 *         vierailemattoman luolan osan X-koordinantin. Mikäli kaikki luolaston
+	 *         osat on löydetty, palauttaa -1
 	 */
 
-	public int haeAloitusX(boolean[][] luolasto, boolean[][] vierailtu) {
+	public Koordinantti haeAloitus(boolean[][] luolasto, boolean[][] vierailtu) {
 		for (int x = 0; x < luolasto.length; x++) {
 			for (int y = 0; y < luolasto.length; y++) {
 				if (!luolasto[x][y] && !vierailtu[x][y]) {
-					return x;
+					return new Koordinantti(x, y);
 				}
 			}
 		}
-		return -1;
-	}
-
-	/*
-	 * Haetaan Y-koordinantti, josta löytyy vielä vierailemattoman luolan
-	 * aloituspiste
-	 * 
-	 * @param luolasto
-	 * 
-	 * @param vierailtu kaikki tähän mennessä löydetyt luolaston osat
-	 *
-	 * @return mikäli löytyy vierailemattomia luolaston osia, palauttaa ensimmäisen
-	 * vierailemattoman luolan osan Y-koordinantin. Mikäli kaikki luolaston osat on
-	 * löydetty, palauttaa -1. Tähän ei pitäisi koskaan joutua Y-koordinantin
-	 * kohdalla, sillä looppi katkaistaan, mikäli X:n haku palauttaa -1
-	 */
-
-	public int haeAloitusY(boolean[][] luolasto, boolean[][] vierailtu) {
-		for (int x = 0; x < luolasto.length; x++) {
-			for (int y = 0; y < luolasto.length; y++) {
-				if (!luolasto[x][y] && !vierailtu[x][y]) {
-					return y;
-				}
-			}
-		}
-		return -1;
+		return null;
 	}
 
 	/*
@@ -248,7 +228,7 @@ public class CAGeneraattori {
 				+ etsiYhtenainenLuolaJaKoko(x - 1, y, luolasto, vierailtu);
 	}
 
-	/*
+	/**
 	 * Poistetaan liian pieni erillinen luola
 	 * 
 	 * @param luolasto
@@ -269,148 +249,117 @@ public class CAGeneraattori {
 		return luolasto;
 	}
 
-	/*
+	/**
 	 * Yhdistetään suurempi erillinen luola toiseen löydettyyn suurempaan luolaan.
-	 * Etsitään lyhin reitti muuhun luolastoon ja luodaan siitä tunnelli.
+	 * Etsitään lyhin reitti muuhun luolastoon ja luodaan siitä tunneli.
 	 * 
 	 * @param luolasto
 	 * 
-	 * @param vierailtu luolasto-matriisi, joihin uusi luola yhdistetään
+	 * @param alku      koordinantti yhdeistettävässä luolassa, josta etäisyydet
+	 *                  lasketaan muualle karttaan
 	 * 
-	 * @param vierailtuKierroksella yhdistettävä luola-matriisi
+	 * @param vierailtu luolasto-matriisi, joihin uusi luola yhdistetään
 	 *
 	 * @return luolasto-matriisi, jossa luola on yhdistetty
 	 */
 
-	public boolean[][] yhdistaLuola(boolean[][] luolasto, boolean[][] vierailtu, boolean[][] vierailtuKierroksella,
-			int xAlku, int yAlku) {
-		// voi yhdistää myös poistettavaan luolaan, koska vierailtu säilyttää myös
-		// niiden tietoja. Miten pois?
+	public boolean[][] yhdista(boolean[][] luolasto, Koordinantti alku, boolean[][] vierailtu) {
+		boolean[][] kasitelty = new boolean[luolasto.length][luolasto.length];
 		int[][] etaisyys = new int[luolasto.length][luolasto.length];
-		boolean muutos;
-		//Etsitään jokaisesta yhdistettävän luolan pisteestä erikseen lyhin reitti
-		//Tarkistetaan mikä lopulta lyhin
-		for (int x = 0; x < etaisyys.length; x++) {
+		for (int x = 0; x < luolasto.length; x++) {
 			for (int y = 0; y < luolasto.length; y++) {
 				etaisyys[x][y] = 100000;
 			}
 		}
-		for (int i = 0; i < etaisyys.length; i++) {
-			for (int j = 0; j < luolasto.length; j++) {
-				if (!vierailtuKierroksella[i][j]) {
-					etaisyys[i][j] = 0;
-					//tarvitaan aina oma etaisyystaulukko, ei voi käyttää samaa per piste
-					//also nyt alkaa olla jo todellakin liian monta sisäistä for loopia
-					//tee oma metodi tosta whilesta, jossa annetaan aina uusi etaisyys matriksi, joka sitten tallennetaan vaikka listaan
-					while (true) {
-						muutos = false;
-						for (int x = 0; x < luolasto.length; x++) {
-							for (int y = 0; y < luolasto.length; y++) {
-								muutos = etsiLyhinReitti(luolasto, etaisyys, vierailtuKierroksella, x + 1, y, etaisyys[x][y]);
-								muutos = etsiLyhinReitti(luolasto, etaisyys, vierailtuKierroksella, x - 1, y, etaisyys[x][y]);
-								muutos = etsiLyhinReitti(luolasto, etaisyys, vierailtuKierroksella, x, y + 1, etaisyys[x][y]);
-								muutos = etsiLyhinReitti(luolasto, etaisyys, vierailtuKierroksella, x, y - 1, etaisyys[x][y]);
-							}
-						}
-						if (!muutos) {
-							break;
-						}
-					}
+		etaisyys[alku.getX()][alku.getY()] = 0;
+		Keko keko = new Keko();
+		keko.lisaa(new Etaisyys(0, alku));
+		while (!keko.onTyhja()) {
+			Etaisyys tutkittava = keko.haeJaPoista();
+			int x = tutkittava.getKoordinantti().getX();
+			int y = tutkittava.getKoordinantti().getY();
+			if (kasitelty[x][y]) {
+				continue;
+			}
+			kasitelty[x][y] = true;
+			Lista naapurit = tutkittava.getKoordinantti().getNaapurit(luolasto.length);
+			for (int i = 0; i < naapurit.koko(); i++) {
+				Koordinantti naapuri = naapurit.hae(i);
+				int paino = luolasto[naapuri.getX()][naapuri.getY()] ? 2 : 1;
+				int nyky = etaisyys[naapuri.getX()][naapuri.getY()];
+				int uusi = etaisyys[x][y] + paino;
+				if (uusi < nyky) {
+					etaisyys[naapuri.getX()][naapuri.getY()] = uusi;
+					keko.lisaa(new Etaisyys(uusi, naapuri));
 				}
 			}
 		}
-		return luoTunneli(luolasto, etaisyys);
+		return luoTunneli(luolasto, etaisyys, vierailtu);
 	}
 
-	/*
-	 * Etsii lyhimmän reitin yhdistettävästä luolasta luolaston annettuun
-	 * koordinanttiin
+	/**
+	 * Etsii etäisyyksien alkupisteestä perusteella lyhimmän reitin luolastojen
+	 * välillä, ja muuttaa sen tunneliksi luolien välillä.
 	 * 
 	 * @param luolasto
 	 * 
-	 * @param etaisyys etaisyys-matiisi, johon tallennetaan etaisyys luolasta kartan
-	 * eri pisteisiin
+	 * @param etaisyys  etaisyys-matiisi, johon tallennetaan etaisyys yhdestä luolan
+	 *                  pisteestä kartan eri pisteisiin
 	 * 
-	 * @param vierailtuKierroksella yhdistettävä luola-matriisi
-	 * 
-	 * @param x tutkittavan kartan osan X-koordinantti
-	 * 
-	 * @param y tutkittavan kartan osan Y-koordinantti
-	 * 
-	 * @param kutsuvanEtaisyys kutsuvan koordinantin etäisyys yhdistettävästä
-	 * luolasta
+	 * @param vierailtu vierailtu-matriisi, joka kertoo yhistettävän luolan
+	 *                  sijainnin kartalla
 	 *
-	 * @return luolasto-matriisi, jossa luola on yhdistetty
+	 * @return luolasto-matriisi, jossa luolat on yhdistetty
 	 */
 
-	public boolean etsiLyhinReitti(boolean[][] luolasto, int[][] etaisyys, boolean[][] vierailtuKierroksella, int x,
-			int y, int kutsuvanEtaisyys) {
-		if (x >= luolasto.length || x < 0 || y >= luolasto.length || y < 0) {
-			return false;
-		}
-		if (vierailtuKierroksella[x][y]) {
-			return false;
-		}
-		int paino = 1;
-		if (onSeina(luolasto, x, y)) {
-			paino = 2;
-		}
-		int nyky = etaisyys[x][y];
-		int uusi = kutsuvanEtaisyys + paino;
-		if (nyky == 0 || uusi < nyky) {
-			etaisyys[x][y] = uusi;
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	/*
-	 * Etsii etäisyyden perusteella luolaston pisteen, johon luola yhdistetään. Luo
-	 * tunnelin luolan ja luolaston välille (vielä tekemättä).
-	 * 
-	 * @param luolasto
-	 * 
-	 * @param etaisyys etaisyys-matiisi, johon tallennetaan etaisyys luolasta kartan
-	 * eri pisteisiin
-	 *
-	 * @return luolasto-matriisi, jossa luola on yhdistetty
-	 */
-
-	public boolean[][] luoTunneli(boolean[][] luolasto, int[][] etaisyys) {
-		int pieninEtaisyys = luolasto.length * luolasto.length;
-		int pienimmanX = 0;
-		int pienimmanY = 0;
-		for (int x = 0; x < luolasto.length; x++) {
-			for (int y = 0; y < luolasto.length; y++) {
-				if (etaisyys[x][y] == 100000) {
-					System.out.print("*,");
-				}
-				System.out.print(etaisyys[x][y] + ",");
-				if (etaisyys[x][y] < pieninEtaisyys && etaisyys[x][y] != 0 && !luolasto[x][y]) {
-					pieninEtaisyys = etaisyys[x][y];
-					pienimmanX = x;
-					pienimmanY = y;
+	public boolean[][] luoTunneli(boolean[][] luolasto, int[][] etaisyys, boolean[][] vierailtu) {
+		Etaisyys lahin = new Etaisyys(10000, new Koordinantti(-1, -1));
+		for (int x = 0; x < vierailtu.length; x++) {
+			for (int y = 0; y < vierailtu.length; y++) {
+				if (vierailtu[x][y] && etaisyys[x][y] < lahin.getEtaisyys()) {
+					lahin = new Etaisyys(etaisyys[x][y], new Koordinantti(x, y));
 				}
 			}
-			System.out.println();
 		}
-
-		System.out.println("X: " + pienimmanX + ", Y: " + pienimmanY);
+		Keko keko = new Keko();
+		keko.lisaa(lahin);
+		boolean valmis = false;
+		boolean[][] muutettu = new boolean[luolasto.length][luolasto.length];
+		while (!keko.onTyhja()) {
+			Koordinantti seinaksi = keko.haeJaPoista().getKoordinantti();
+			luolasto[seinaksi.getX()][seinaksi.getY()] = false;
+			muutettu[seinaksi.getX()][seinaksi.getY()] = true;
+			vierailtu[seinaksi.getX()][seinaksi.getY()] = true;
+			Lista naapurit = seinaksi.getNaapurit(luolasto.length);
+			for (int i = 0; i < naapurit.koko(); i++) {
+				int naapurinEtaisyys = etaisyys[naapurit.hae(i).getX()][naapurit.hae(i).getY()];
+				if (naapurinEtaisyys == 0) {
+					valmis = true;
+					break;
+				}
+				if (naapurinEtaisyys <= lahin.getEtaisyys()
+						&& !muutettu[naapurit.hae(i).getX()][naapurit.hae(i).getY()]) {
+					lahin = new Etaisyys(naapurinEtaisyys, naapurit.hae(i));
+				}
+			}
+			if (!valmis) {
+				keko.lisaa(lahin);
+			}
+		}
 		return luolasto;
 	}
 
-	/*
+	/**
 	 * Päivitetään vierailtu-matriisiin kierroksella löydetty luola
 	 * 
 	 * @param luolasto
 	 * 
-	 * @param vierailtu kaikki täät kierrosta ennen löydetyt luolaston osat
+	 *                              osat
 	 * 
 	 * @param vierailtuKierroksella tällä kierroksella löydetty luolaston osa
 	 *
 	 * @return vierailtu-matriisi, jossa näkyy kaikki tähän asti vieraillut osat
-	 * luolastosta
+	 *         luolastosta
 	 */
 
 	public boolean[][] lisaaVierailtu(boolean[][] luolasto, boolean[][] vierailtu, boolean[][] vierailtuKierroksella) {
@@ -422,29 +371,5 @@ public class CAGeneraattori {
 			}
 		}
 		return vierailtu;
-	}
-	
-
-	public void tulosta(boolean[][] luolasto) {
-		System.out.println();
-		for (int i = 0; i < luolasto.length + 2; i++) {
-			System.out.print("-");
-		}
-		for (int x = 0; x < luolasto.length; x++) {
-			System.out.println();
-			System.out.print("|");
-			for (int y = 0; y < luolasto.length; y++) {
-				if (luolasto[x][y]) {
-					System.out.print("*");
-				} else {
-					System.out.print(" ");
-				}
-			}
-			System.out.print("|");
-		}
-		System.out.println();
-		for (int i = 0; i < luolasto.length + 2; i++) {
-			System.out.print("-");
-		}
 	}
 }
