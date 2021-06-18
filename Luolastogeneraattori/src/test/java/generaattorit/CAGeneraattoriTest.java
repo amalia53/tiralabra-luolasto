@@ -89,6 +89,18 @@ public class CAGeneraattoriTest {
 	}
 	
 	@Test
+	public void yhdistaYhdistaaSuurenErillisenLuolan() {
+		boolean[][] vierailtuKierroksella = new boolean[5][5];
+		vierailtuKierroksella[2][1] = true;
+		vierailtuKierroksella[3][1] = true;
+		vierailtuKierroksella[4][0] = true;
+		vierailtuKierroksella[4][1] = true;
+		Assert.assertEquals(testiLuolastoEiYhtenainen[3][1], false);
+		gen.poistaLuola(testiLuolastoEiYhtenainen, vierailtuKierroksella);
+		Assert.assertEquals(testiLuolastoEiYhtenainen[3][1], true);
+	}
+	
+	@Test
 	public void etsiYhtenainenLuolaJaKokoPalauttaaYhtenaisenLuolanKoon() {
 		boolean[][] vierailtu = new boolean[5][5];	
 		Assert.assertEquals(gen.etsiYhtenainenLuolaJaKoko(0, 0, testiLuolastoEiYhtenainen, vierailtu), 11);

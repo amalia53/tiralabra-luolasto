@@ -11,6 +11,14 @@ public class Lista {
 
 	}
 
+	/**
+	 * Lisää listaan annetun Koordinantin ja kasvattaa indeksiä yhdellä. Mikäli
+	 * lista on jo täysi, kasvattaa ensin listan kokoa.
+	 * 
+	 * @param lisattava koordinantti
+	 * 
+	 */
+
 	public void lisaa(Koordinantti lisattava) {
 		if (onTaynna()) {
 			kasvata();
@@ -19,6 +27,15 @@ public class Lista {
 		indeksi++;
 	}
 
+	/**
+	 * Hakee annetusta indeksistä koordinantin ja palauttaa sen. Mikäli indeksi ei
+	 * ole listan sisällä, antaa virheviestin.
+	 * 
+	 * @param i haluttu indeksi
+	 * 
+	 * @return pyydetty koordinantti
+	 */
+
 	public Koordinantti hae(int i) {
 		if (i < indeksi && i >= 0) {
 			return lista[i];
@@ -26,6 +43,15 @@ public class Lista {
 			throw new IndexOutOfBoundsException();
 		}
 	}
+
+	/**
+	 * Poistaa annetusta indeksistä koordinantin ja siirtää sen jälkeiset listan
+	 * alkiot yhden taaksepäin. Mikäli indeksi ei ole listan sisällä, antaa
+	 * virheviestin.
+	 * 
+	 * @param i haluttu indeksi
+	 * 
+	 */
 
 	public void poista(int poistettavaI) {
 		if (poistettavaI < indeksi && poistettavaI >= 0) {
@@ -38,6 +64,13 @@ public class Lista {
 			throw new IndexOutOfBoundsException();
 		}
 	}
+	
+	/**
+	 * Hakee ja poistaa päällimmäisen alkion listasta
+	 * 
+	 * @return päällimmäisin koordinantti
+	 * 
+	 */
 
 	public Koordinantti haeJaPoistaPaallimmaisin() {
 		Koordinantti palautettava = lista[indeksi - 1];
@@ -45,6 +78,15 @@ public class Lista {
 		indeksi--;
 		return palautettava;
 	}
+	
+	/**
+	 * Tarkistaa, sisältääkö lista annettua koordinanttia
+	 * 
+	 * @param etsittava 
+	 * 
+	 * @return totuusarvo true, jos sisältää, false, jos ei
+	 * 
+	 */
 
 	public boolean sisaltaa(Koordinantti etsittava) {
 		for (int i = 0; i < indeksi; i++) {
@@ -54,19 +96,43 @@ public class Lista {
 		}
 		return false;
 	}
+	
+	/**
+	 * Tarkistaa onko lista tyhjä.
+	 * 
+	 * @return totuusarvo true, jos on tyhjä, false, jos ei ole tyhjä
+	 */
 
 	public boolean onTyhja() {
 		return indeksi == 0;
 	}
+	
+	/**
+	 * Tarkistaa onko lista täynnä
+	 * 
+	 * @return totuusatrvo true, jos lista on täynnä, false, jos on vielä tilaa
+	 */
 
 	public boolean onTaynna() {
 		return indeksi == lista.length;
 	}
+	
+	
+	/**
+	 * Palauttaa listan koon eli alkioiden määrän listassa
+	 * 
+	 * @return alkioiden määrä listassa
+	 */
 
 	public int koko() {
 		return indeksi;
 	}
 
+	/**
+	 * Kasvattaa listan koon kaksinkertiaseksi
+	 * 
+	 */
+	
 	public void kasvata() {
 		Koordinantti[] uusiLista = new Koordinantti[indeksi * 2];
 		for (int i = 0; i < indeksi; i++) {
@@ -74,6 +140,11 @@ public class Lista {
 		}
 		this.lista = uusiLista;
 	}
+	
+	/**
+	 * Tulostaa listan
+	 * 
+	 */
 
 	public void printtaa() {
 		System.out.print("[");

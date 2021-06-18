@@ -24,6 +24,14 @@ public class Koordinantti {
 	public void setY(int y) {
 		this.y = y;
 	}
+	
+	/**
+	 * Luo listan, jossa kaikki koordinaatin naapurien koordinaatit ja palauttaa sen
+	 * 
+	 * @param pituus kartan koko
+	 * 
+	 * @return lista naapurien koordinaateista
+	 */
 
 	public Lista getNaapurit(int pituus) {
 		Lista naapurit = new Lista();
