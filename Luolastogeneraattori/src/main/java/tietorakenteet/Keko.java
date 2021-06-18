@@ -2,8 +2,8 @@ package tietorakenteet;
 
 public class Keko {
 
-	Etaisyys[] keko;
-	int indeksi;
+	private Etaisyys[] keko;
+	private int indeksi;
 
 	public Keko() {
 		keko = new Etaisyys[10];

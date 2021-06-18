@@ -2,7 +2,7 @@ package tietorakenteet;
 
 public class Koordinantti {
 
-	int x, y;
+	private int x, y;
 
 	public Koordinantti(int x, int y) {
 		this.x = x;
@@ -48,15 +48,6 @@ public class Koordinantti {
 			naapurit.lisaa(new Koordinantti(x, y - 1));
 		}
 		return naapurit;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + x;
-		result = prime * result + y;
-		return result;
 	}
 
 	public boolean equals(Koordinantti verrattava) {

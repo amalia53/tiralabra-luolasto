@@ -6,7 +6,7 @@ import tietorakenteet.Etaisyys;
 import tietorakenteet.Keko;
 import tietorakenteet.Koordinantti;
 import tietorakenteet.Lista;
-import tietorakenteet.Satunnainen;
+//import tietorakenteet.Satunnainen;
 
 public class CAGeneraattori {
 
@@ -44,7 +44,7 @@ public class CAGeneraattori {
 	 */
 
 	public void alustaLuolasto() {
-		Satunnainen satunnainen = new Satunnainen();
+//		Satunnainen satunnainen = new Satunnainen();
 		Random random = new Random();
 		for (int x = 0; x < luolasto.length; x++) {
 			for (int y = 0; y < luolasto.length; y++) {

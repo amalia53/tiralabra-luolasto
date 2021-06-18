@@ -1,9 +1,9 @@
 package generaattorit;
 
-import tietorakenteet.Koordinantti;
-import tietorakenteet.Lista;
+//import tietorakenteet.Koordinantti;
+//import tietorakenteet.Lista;
 import tietorakenteet.Luola;
-import tietorakenteet.Satunnainen;
+//import tietorakenteet.Satunnainen;
 
 public class BSPGeneraattori {
 

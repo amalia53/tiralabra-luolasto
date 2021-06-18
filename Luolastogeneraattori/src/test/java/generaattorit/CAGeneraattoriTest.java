@@ -2,8 +2,6 @@ package generaattorit;
 
 import org.junit.*;
 
-import generaattorit.CAGeneraattori;
-
 public class CAGeneraattoriTest {
 	
 	CAGeneraattori gen;
