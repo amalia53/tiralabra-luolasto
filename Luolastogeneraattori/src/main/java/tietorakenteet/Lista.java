@@ -44,10 +44,6 @@ public class Lista {
 		}
 	}
 
-	public Koordinantti[] getLista() {
-		return lista;
-	}
-
 	/**
 	 * Poistaa annetusta indeksistä koordinantin ja siirtää sen jälkeiset listan
 	 * alkiot yhden taaksepäin. Mikäli indeksi ei ole listan sisällä, antaa
@@ -145,6 +141,10 @@ public class Lista {
 		this.lista = uusiLista;
 	}
 	
+	public Koordinantti[] getLista() {
+		return lista;
+	}
+
 	/**
 	 * Tulostaa listan
 	 * 
