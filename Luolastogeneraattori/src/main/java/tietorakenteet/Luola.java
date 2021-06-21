@@ -6,7 +6,7 @@ public class Luola {
 	private int minKoko;
 	private int korkeus, leveys;
 	private int x, y;
-	private Luola vasen, oikea;
+	private Luola vasen, oikea, sisar;
 
 	public Luola(int x, int y, int korkeus, int leveys, int minKoko) {
 		this.x = x;
@@ -15,7 +15,7 @@ public class Luola {
 		this.leveys = leveys;
 		this.minKoko = minKoko;
 	}
-	
+
 	public Luola getVasen() {
 		return vasen;
 	}
@@ -23,7 +23,15 @@ public class Luola {
 	public Luola getOikea() {
 		return oikea;
 	}
-	
+
+	public void setSisar(Luola sisar) {
+		this.sisar = sisar;
+	}
+
+	public Luola getSisar() {
+		return sisar;
+	}
+
 	public int getX() {
 		return x;
 	}
@@ -38,7 +46,7 @@ public class Luola {
 	 * pystysuunnassa satunnaisen kokoisiksi alueiksi.
 	 *
 	 * @return true, jos pystyttiin jakamaan kahtia; false, jos ei voi enää jakaa
-	 * pienemmiksi.
+	 *         pienemmiksi.
 	 */
 
 	public boolean jaaAlue() {
@@ -68,17 +76,20 @@ public class Luola {
 			vasen = new Luola(x, y, korkeus, leikkaus, minKoko);
 			oikea = new Luola(x + leikkaus, y, korkeus, leveys - leikkaus, minKoko);
 		}
+		vasen.setSisar(oikea);
+		oikea.setSisar(vasen);
 		return true;
 	}
 
 	/**
-	 * Luo luola-alueen sisään mahtuvan satunnaisen kokoisen luolan satunnaiseen kohtaan aluetta. Lisää luodun luolan annettuun luolastoon.
+	 * Luo luola-alueen sisään mahtuvan satunnaisen kokoisen luolan satunnaiseen
+	 * kohtaan aluetta. Lisää luodun luolan annettuun luolastoon.
 	 *
 	 * @param luolasto
 	 * 
 	 * @return luolasto, jossa lisättynä luola
 	 */
-	
+
 	public boolean[][] luoLuola(boolean[][] luolasto) {
 		int minLeveys = this.leveys / 3;
 		int minKorkeus = this.leveys / 3;

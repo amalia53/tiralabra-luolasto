@@ -33,7 +33,7 @@ public class Koordinantti {
 	 * @return lista naapurien koordinaateista
 	 */
 
-	public Lista getNaapurit(int pituus) {
+	public Lista haeNaapurit(int pituus) {
 		Lista naapurit = new Lista();
 		if (x + 1 < pituus) {
 			naapurit.lisaa(new Koordinantti(x + 1, y));
@@ -50,7 +50,7 @@ public class Koordinantti {
 		return naapurit;
 	}
 
-	public boolean equals(Koordinantti verrattava) {
+	public boolean onSamaKuin(Koordinantti verrattava) {
 		return (this.x == verrattava.x && this.y == verrattava.y);
 	}
 

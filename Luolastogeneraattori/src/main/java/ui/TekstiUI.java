@@ -26,7 +26,8 @@ public class TekstiUI {
 
 	public void kaynnista() {
 		int koko = kysyKoko();
-		int pieninLuola = kysyPieninLuolanKoko();
+//		int pieninLuola = kysyPieninLuolanKoko();
+		int pieninLuola = koko / 5;
 		CAGeneraattori ca = new CAGeneraattori();
 		BSPGeneraattori bsp = new BSPGeneraattori();
 		boolean[][] luolastoCA = ca.generoi(koko);
@@ -35,7 +36,7 @@ public class TekstiUI {
 		System.out.println();
 		System.out.println();
 		System.out.println();
-		tulosta(luolastoBSP);
+//		tulosta(luolastoBSP);
 	}
 
 	/**

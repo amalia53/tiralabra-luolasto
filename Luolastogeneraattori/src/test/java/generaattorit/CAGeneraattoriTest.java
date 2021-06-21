@@ -7,6 +7,7 @@ public class CAGeneraattoriTest {
 	CAGeneraattori gen;
 	boolean[][] testiLuolasto;
 	boolean[][] testiLuolastoEiYhtenainen;
+	boolean[][] testiLuolastoKaksiSuurta;
 
 	@Before
 	public void setUp() {
@@ -32,6 +33,7 @@ public class CAGeneraattoriTest {
 		int seinat = gen.laskeNaapuritJotkaSeinia(testiLuolasto, 4, 4);
 		Assert.assertEquals(seinat, 5);
 	}
+	
 	
 	@Test
 	public void parannaMuuttaaLuolaksiJosNaapureistaAlle4OnSeinia() {
@@ -146,6 +148,16 @@ public class CAGeneraattoriTest {
 		gen.teeYhtenaiseksi(testiLuolastoEiYhtenainen);
 		Assert.assertEquals(testiLuolastoEiYhtenainen[3][1], true);
 	}
+	
+//	@Test
+//	public void teeYhtenaiseksiLoytaaSuurenErillisenLuolanJaYhdistaaSen() {
+//		luoTestiLuolastoKaksiSuurta();
+//		float luolanOsuus = gen.tarkistaLuolanOsuus(testiLuolastoKaksiSuurta);
+//		gen.teeYhtenaiseksi(testiLuolastoKaksiSuurta);
+//		float luolanOsuusNyt = gen.tarkistaLuolanOsuus(testiLuolastoKaksiSuurta);
+//		boolean yhdistetty = luolanOsuusNyt > luolanOsuus;
+//		Assert.assertEquals(yhdistetty, true);
+//	}
 
 	public void luoTestiLuolasto() {
 		testiLuolasto = new boolean[5][5];
@@ -175,5 +187,17 @@ public class CAGeneraattoriTest {
 		testiLuolastoEiYhtenainen[4][2] = true;
 		testiLuolastoEiYhtenainen[4][3] = true;
 		testiLuolastoEiYhtenainen[4][4] = true;
+	}
+	
+	public void luoTestiLuolastoKaksiSuurta() {
+		testiLuolastoKaksiSuurta = new boolean[5][5];
+		testiLuolastoEiYhtenainen[0][3] = true;
+		testiLuolastoEiYhtenainen[0][4] = true;
+		testiLuolastoEiYhtenainen[1][3] = true;
+		testiLuolastoEiYhtenainen[2][3] = true;
+		testiLuolastoEiYhtenainen[3][0] = true;
+		testiLuolastoEiYhtenainen[3][1] = true;
+		testiLuolastoEiYhtenainen[3][2] = true;
+		testiLuolastoEiYhtenainen[3][3] = true;
 	}
 }

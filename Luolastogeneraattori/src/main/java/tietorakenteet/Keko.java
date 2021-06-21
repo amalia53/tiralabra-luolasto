@@ -23,7 +23,7 @@ public class Keko {
 		keko[indeksi] = lisattava;
 		int uudenIndeksi = indeksi;
 		for (int i = indeksi - 1; i >= 0; i--) {
-			if (keko[i].lahempi(lisattava)) {
+			if (keko[i].lahempiKuin(lisattava)) {
 				vaihda(keko[i], lisattava, i, uudenIndeksi);
 				uudenIndeksi = i;
 			}
@@ -103,6 +103,10 @@ public class Keko {
 
 	public boolean onTaynna() {
 		return indeksi == keko.length;
+	}
+	
+	public Etaisyys[] getKeko() {
+		return this.keko;
 	}
 
 }

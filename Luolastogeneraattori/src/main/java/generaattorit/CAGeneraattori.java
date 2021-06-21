@@ -32,6 +32,9 @@ public class CAGeneraattori {
 		for (int i = 0; i < kierroksia; i++) {
 			luolasto = paranna(luolasto);
 		}
+		if (tarkistaLuolanOsuus(luolasto) < 0.4) {
+			generoi(koko);
+		}	
 		luolasto = teeYhtenaiseksi(luolasto);
 		return luolasto;
 	}
@@ -282,7 +285,7 @@ public class CAGeneraattori {
 				continue;
 			}
 			kasitelty[x][y] = true;
-			Lista naapurit = tutkittava.getKoordinantti().getNaapurit(luolasto.length);
+			Lista naapurit = tutkittava.getKoordinantti().haeNaapurit(luolasto.length);
 			for (int i = 0; i < naapurit.koko(); i++) {
 				Koordinantti naapuri = naapurit.hae(i);
 				int paino = luolasto[naapuri.getX()][naapuri.getY()] ? 2 : 1;
@@ -330,7 +333,7 @@ public class CAGeneraattori {
 			luolasto[seinaksi.getX()][seinaksi.getY()] = false;
 			muutettu[seinaksi.getX()][seinaksi.getY()] = true;
 			vierailtu[seinaksi.getX()][seinaksi.getY()] = true;
-			Lista naapurit = seinaksi.getNaapurit(luolasto.length);
+			Lista naapurit = seinaksi.haeNaapurit(luolasto.length);
 			for (int i = 0; i < naapurit.koko(); i++) {
 				int naapurinEtaisyys = etaisyys[naapurit.hae(i).getX()][naapurit.hae(i).getY()];
 				if (naapurinEtaisyys == 0) {
@@ -372,4 +375,16 @@ public class CAGeneraattori {
 		}
 		return vierailtu;
 	}
+	
+	public float tarkistaLuolanOsuus(boolean[][] luolasto) {
+	float luolaa = 0;
+	for (int i = 0; i < luolasto.length; i++) {
+		for (int j = 0; j < luolasto.length; j++) {
+			if (!luolasto[i][j]) {
+				luolaa++;
+			}
+		}
+	}
+	return luolaa / (luolasto.length * luolasto.length);
+}
 }

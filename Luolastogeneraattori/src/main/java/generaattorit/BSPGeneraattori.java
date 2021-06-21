@@ -1,13 +1,19 @@
 package generaattorit;
 
+import tietorakenteet.Etaisyys;
+import tietorakenteet.Keko;
+import tietorakenteet.Koordinantti;
+import tietorakenteet.Lista;
 //import tietorakenteet.Koordinantti;
 //import tietorakenteet.Lista;
 import tietorakenteet.Luola;
+import tietorakenteet.LuolaLista;
 //import tietorakenteet.Satunnainen;
 
 public class BSPGeneraattori {
 
 	private boolean[][] luolasto;
+	private LuolaLista lista;
 
 	/**
 	 * Generoi algoritmin
@@ -21,6 +27,7 @@ public class BSPGeneraattori {
 		luolasto = new boolean[koko][koko];
 		Luola juuri = new Luola(0, 0, koko, koko, pieninLuola);
 		alustaLuolasto(juuri);
+//		tallennaListaan(juuri);
 		luoLuolasto(juuri);
 		return luolasto;
 	}
@@ -57,6 +64,51 @@ public class BSPGeneraattori {
 		}
 	}
 	
+	public void tallennaListaan(Luola luola) {
+		if (luola.getVasen() != null) {
+			tallennaListaan(luola.getVasen());
+			tallennaListaan(luola.getOikea());
+		} else {
+			lista.lisaa(luola);
+		}
+	}
+	
+//	public void luoTunnelit() {
+//		boolean[][] kasitelty;
+//		int[][] etaisyys;
+//		for (int i = 0; i < lista.koko(); i++) {
+//			kasitelty = new boolean[luolasto.length][luolasto.length];
+//			etaisyys = new int[luolasto.length][luolasto.length];
+//			for (int x = 0; x < luolasto.length; x++) {
+//				for (int y = 0; y < luolasto.length; y++) {
+//					etaisyys[x][y] = 100000;
+//				}
+//			}
+//			etaisyys[lista.hae(i).getX()][lista.hae(i).getY()] = 0;
+//			Keko keko = new Keko();
+//			keko.lisaa(new Etaisyys(0, alku));
+//			while (!keko.onTyhja()) {
+//				Etaisyys tutkittava = keko.haeJaPoista();
+//				int x = tutkittava.getKoordinantti().getX();
+//				int y = tutkittava.getKoordinantti().getY();
+//				if (kasitelty[x][y]) {
+//					continue;
+//				}
+//				kasitelty[x][y] = true;
+//				Lista naapurit = tutkittava.getKoordinantti().getNaapurit(luolasto.length);
+//				for (int i = 0; i < naapurit.koko(); i++) {
+//					Koordinantti naapuri = naapurit.hae(i);
+//					int paino = luolasto[naapuri.getX()][naapuri.getY()] ? 2 : 1;
+//					int nyky = etaisyys[naapuri.getX()][naapuri.getY()];
+//					int uusi = etaisyys[x][y] + paino;
+//					if (uusi < nyky) {
+//						etaisyys[naapuri.getX()][naapuri.getY()] = uusi;
+//						keko.lisaa(new Etaisyys(uusi, naapuri));
+//					}
+//				}
+//			}
+//		}
+//	}
 	
 
 //	public boolean[][] luoTunnelit(boolean[][] luolasto) {

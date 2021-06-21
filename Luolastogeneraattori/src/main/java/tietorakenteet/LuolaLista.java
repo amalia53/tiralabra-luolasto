@@ -1,25 +1,25 @@
 package tietorakenteet;
 
-public class Lista {
+public class LuolaLista {
 
-	private Koordinantti[] lista;
+	private Luola[] lista;
 	private int indeksi;
 
-	public Lista() {
-		lista = new Koordinantti[10];
+	public LuolaLista() {
+		lista = new Luola[10];
 		indeksi = 0;
 
 	}
 
 	/**
-	 * Lisää listaan annetun Koordinantin ja kasvattaa indeksiä yhdellä. Mikäli
+	 * Lisää listaan annetun Luolan ja kasvattaa indeksiä yhdellä. Mikäli
 	 * lista on jo täysi, kasvattaa ensin listan kokoa.
 	 * 
-	 * @param lisattava koordinantti
+	 * @param lisattava luola
 	 * 
 	 */
 
-	public void lisaa(Koordinantti lisattava) {
+	public void lisaa(Luola lisattava) {
 		if (onTaynna()) {
 			kasvata();
 		}
@@ -28,15 +28,15 @@ public class Lista {
 	}
 
 	/**
-	 * Hakee annetusta indeksistä koordinantin ja palauttaa sen. Mikäli indeksi ei
+	 * Hakee annetusta indeksistä luolan ja palauttaa sen. Mikäli indeksi ei
 	 * ole listan sisällä, antaa virheviestin.
 	 * 
 	 * @param i haluttu indeksi
 	 * 
-	 * @return pyydetty koordinantti
+	 * @return pyydetty luola
 	 */
 
-	public Koordinantti hae(int i) {
+	public Luola hae(int i) {
 		if (i < indeksi && i >= 0) {
 			return lista[i];
 		} else {
@@ -45,7 +45,7 @@ public class Lista {
 	}
 
 	/**
-	 * Poistaa annetusta indeksistä koordinantin ja siirtää sen jälkeiset listan
+	 * Poistaa annetusta indeksistä luolan ja siirtää sen jälkeiset listan
 	 * alkiot yhden taaksepäin. Mikäli indeksi ei ole listan sisällä, antaa
 	 * virheviestin.
 	 * 
@@ -68,19 +68,19 @@ public class Lista {
 	/**
 	 * Hakee ja poistaa päällimmäisen alkion listasta
 	 * 
-	 * @return päällimmäisin koordinantti
+	 * @return päällimmäisin luola
 	 * 
 	 */
 
-	public Koordinantti haeJaPoistaPaallimmaisin() {
-		Koordinantti palautettava = lista[indeksi - 1];
+	public Luola haeJaPoistaPaallimmaisin() {
+		Luola palautettava = lista[indeksi - 1];
 		lista[indeksi - 1] = null;
 		indeksi--;
 		return palautettava;
 	}
 	
 	/**
-	 * Tarkistaa, sisältääkö lista annettua koordinanttia
+	 * Tarkistaa, sisältääkö lista annettua luolaa
 	 * 
 	 * @param etsittava 
 	 * 
@@ -88,9 +88,9 @@ public class Lista {
 	 * 
 	 */
 
-	public boolean sisaltaa(Koordinantti etsittava) {
+	public boolean sisaltaa(Luola etsittava) {
 		for (int i = 0; i < indeksi; i++) {
-			if (lista[i].onSamaKuin(etsittava)) {
+			if (lista[i].equals(etsittava)) {
 				return true;
 			}
 		}
@@ -134,7 +134,7 @@ public class Lista {
 	 */
 	
 	public void kasvata() {
-		Koordinantti[] uusiLista = new Koordinantti[indeksi * 2];
+		Luola[] uusiLista = new Luola[indeksi * 2];
 		for (int i = 0; i < indeksi; i++) {
 			uusiLista[i] = lista[i];
 		}

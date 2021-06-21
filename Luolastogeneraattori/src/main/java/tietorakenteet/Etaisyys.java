@@ -17,7 +17,7 @@ public class Etaisyys {
 	 * @return true, jos oma lähempi, false, jos annettu etäisyys lähempi
 	 */
 
-	public boolean lahempi(Etaisyys verrattava) {
+	public boolean lahempiKuin(Etaisyys verrattava) {
 		return this.etaisyys < verrattava.etaisyys;
 	}
 
