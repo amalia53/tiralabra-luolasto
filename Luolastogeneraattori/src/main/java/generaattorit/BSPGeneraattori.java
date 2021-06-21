@@ -1,9 +1,5 @@
 package generaattorit;
 
-import tietorakenteet.Etaisyys;
-import tietorakenteet.Keko;
-import tietorakenteet.Koordinantti;
-import tietorakenteet.Lista;
 //import tietorakenteet.Koordinantti;
 //import tietorakenteet.Lista;
 import tietorakenteet.Luola;

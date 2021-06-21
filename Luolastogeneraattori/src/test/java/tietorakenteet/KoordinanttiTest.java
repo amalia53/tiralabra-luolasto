@@ -20,6 +20,10 @@ public class KoordinanttiTest {
 		Koordinantti k = new Koordinantti(0,2);
 		Lista naapurit = k.haeNaapurit(3);
 		Assert.assertEquals(naapurit.koko(), 2);
+		k.setX(2);
+		k.setY(0);
+		naapurit = k.haeNaapurit(3);
+		Assert.assertEquals(naapurit.koko(), 2);
 	}
 	
 	@Test
