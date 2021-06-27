@@ -37,7 +37,7 @@ public class BSPGeneraattori {
 
 	/**
 	 * Luo puun, joka koostuu erikokoisista luola-alueista. Jakaa luolan kahdeksi
-	 * pienemmäksi
+	 * pienemmäksi, mikäli alue on tarpeeksi suuri.
 	 * 
 	 * @param alue
 	 */
@@ -51,8 +51,7 @@ public class BSPGeneraattori {
 	}
 
 	/**
-	 * Luo luolat puun lehtien luola-alueisiin. Tulevaisuudessa tulee myös luomaan
-	 * käytävät luolien välille
+	 * Luo luolat puun lehtien luola-alueisiin.
 	 * 
 	 * @param luola
 	 *
