@@ -27,7 +27,7 @@ Tietorakenteet-pakkauksesta löytyy
 
 ## Puutteet ja parannusideat
 
-- BSP:n testaus
+- BSP:n ja Luola-tietorakenteen testaus
 - BSP:n tunnelien luominen niin, ettei samoja luolia yhdistettäisi toisiinsa vaan saataisiin paremman näköinen tunneliverkosto
 - BSP:n tunnelien luomisen koodin refaktorointi
 - Satunnainen-luookassa parempi metodi todennäköisyydelle, jolla saataisiin CA-generaattorin luolan alustus toimimaan yhtä siististi kuin Random-luokalla, jota päädyin käyttämään. Omalla luolastot näyttivät huonommalta
