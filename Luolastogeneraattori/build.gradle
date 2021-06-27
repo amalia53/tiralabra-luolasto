@@ -38,3 +38,11 @@ dependencies {
     testImplementation 'junit:junit:4.12'
 }
 
+jar {
+  manifest {
+    attributes(
+      'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
+      'Main-Class': 'ohjelma.Main'
+    )
+  }
+}

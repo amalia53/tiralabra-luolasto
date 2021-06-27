@@ -35,6 +35,9 @@ public class TekstiUI {
 		System.out.println();
 		System.out.println();
 		tulosta(luolastoBSP);
+		System.out.println();
+		System.out.println();
+		System.out.println();
 	}
 
 	/**
