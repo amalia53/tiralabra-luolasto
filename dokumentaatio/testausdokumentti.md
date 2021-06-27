@@ -2,7 +2,7 @@
 
 Molemmat generaattorit luovat määritelmän mukaisia karttoja. Molemmat algoritmit luovat yhtenäisiä luolastoja, joka tarkistetaan ohjelmaa ajaessa. Molemmissa kartoissa voidaan kulkea ylös, alas, vasemmalle ja oikealle, joka myös tarkistetaan ohjelmaa ajaessa. 
 
-Ohjelmalla voidaan luoda 20 - 120 kokoisia karttoja. Mikäli ohjelmalle antaa syötteen näiden ulkopuolelta, pyytää ohjelma uutta syötettä. BSP-generaattorilla voitaisiin luoda ainakin 200 kokoisia, mutta CA-generaattorin yhtenäisyyden tarkistaminen aiheuttaa DtackOverFlown. 
+Ohjelmalla voidaan luoda 20 - 120 kokoisia karttoja. Mikäli ohjelmalle antaa syötteen näiden ulkopuolelta, pyytää ohjelma uutta syötettä. BSP-generaattorilla voitaisiin luoda ainakin 200 kokoisia, mutta CA-generaattorin yhtenäisyyden tarkistaminen aiheuttaa StackOverFlown. 
 
 ## CA-generaattori
 
