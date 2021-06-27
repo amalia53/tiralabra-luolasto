@@ -18,8 +18,11 @@ public class Satunnainen {
 	}
 	
 	public int kokonaislukuValilta(int min, int max) { 
-		if (max-min <= 0) {
-			return 0;
+		if (max-min < 0) {
+			throw new IndexOutOfBoundsException();
+		}
+		if (max == min) {
+			return min;
 		}
 		int satunnainen = satunnainen() % (max-min+1);
 		satunnainen += min;

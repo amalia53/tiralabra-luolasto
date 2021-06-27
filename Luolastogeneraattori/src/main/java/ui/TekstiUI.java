@@ -26,17 +26,15 @@ public class TekstiUI {
 
 	public void kaynnista() {
 		int koko = kysyKoko();
-//		int pieninLuola = kysyPieninLuolanKoko();
-		int pieninLuola = koko / 5;
 		CAGeneraattori ca = new CAGeneraattori();
 		BSPGeneraattori bsp = new BSPGeneraattori();
-		boolean[][] luolastoCA = ca.generoi(koko);
-		boolean[][] luolastoBSP = bsp.generoi(koko, pieninLuola);
-		tulosta(luolastoCA);
+//		boolean[][] luolastoCA = ca.generoi(koko);
+		boolean[][] luolastoBSP = bsp.generoi(koko);
+//		tulosta(luolastoCA);
 		System.out.println();
 		System.out.println();
 		System.out.println();
-//		tulosta(luolastoBSP);
+		tulosta(luolastoBSP);
 	}
 
 	/**
@@ -74,23 +72,23 @@ public class TekstiUI {
 	 * 
 	 * @return koko
 	 */
-
-	public int kysyPieninLuolanKoko() {
-		System.out.print("Anna pienimmän luolan koko: ");
-		if (lukija.hasNextInt()) {
-			int koko = lukija.nextInt();
-			if (koko > 0) {
-				return koko;
-			} else {
-				System.out.println("Syötä positiivinen kokonaisluku");
-				return kysyPieninLuolanKoko();
-			}
-		} else {
-			lukija.next();
-			System.out.println("Syötä positiivinen kokonaisluku");
-			return kysyPieninLuolanKoko();
-		}
-	}
+//
+//	public int kysyPieninLuolanKoko() {
+//		System.out.print("Anna pienimmän luolan koko: ");
+//		if (lukija.hasNextInt()) {
+//			int koko = lukija.nextInt();
+//			if (koko > 0) {
+//				return koko;
+//			} else {
+//				System.out.println("Syötä positiivinen kokonaisluku");
+//				return kysyPieninLuolanKoko();
+//			}
+//		} else {
+//			lukija.next();
+//			System.out.println("Syötä positiivinen kokonaisluku");
+//			return kysyPieninLuolanKoko();
+//		}
+//	}
 	
 	/**
 	 * Tulostetaan parametrina annettu matriisi. Seinät näytetään tähtinä, luolat tyhjinä ja luolasto on rajattu viivoin.

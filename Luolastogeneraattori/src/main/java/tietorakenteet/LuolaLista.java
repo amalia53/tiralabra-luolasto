@@ -2,24 +2,24 @@ package tietorakenteet;
 
 public class LuolaLista {
 
-	private Luola[] lista;
+	private Alue[] lista;
 	private int indeksi;
 
 	public LuolaLista() {
-		lista = new Luola[10];
+		lista = new Alue[10];
 		indeksi = 0;
 
 	}
 
 	/**
-	 * Lisää listaan annetun Luolan ja kasvattaa indeksiä yhdellä. Mikäli
-	 * lista on jo täysi, kasvattaa ensin listan kokoa.
+	 * Lisää listaan annetun Luolan ja kasvattaa indeksiä yhdellä. Mikäli lista on
+	 * jo täysi, kasvattaa ensin listan kokoa.
 	 * 
 	 * @param lisattava luola
 	 * 
 	 */
 
-	public void lisaa(Luola lisattava) {
+	public void lisaa(Alue lisattava) {
 		if (onTaynna()) {
 			kasvata();
 		}
@@ -28,15 +28,15 @@ public class LuolaLista {
 	}
 
 	/**
-	 * Hakee annetusta indeksistä luolan ja palauttaa sen. Mikäli indeksi ei
-	 * ole listan sisällä, antaa virheviestin.
+	 * Hakee annetusta indeksistä luolan ja palauttaa sen. Mikäli indeksi ei ole
+	 * listan sisällä, antaa virheviestin.
 	 * 
 	 * @param i haluttu indeksi
 	 * 
 	 * @return pyydetty luola
 	 */
 
-	public Luola hae(int i) {
+	public Alue hae(int i) {
 		if (i < indeksi && i >= 0) {
 			return lista[i];
 		} else {
@@ -45,9 +45,8 @@ public class LuolaLista {
 	}
 
 	/**
-	 * Poistaa annetusta indeksistä luolan ja siirtää sen jälkeiset listan
-	 * alkiot yhden taaksepäin. Mikäli indeksi ei ole listan sisällä, antaa
-	 * virheviestin.
+	 * Poistaa annetusta indeksistä luolan ja siirtää sen jälkeiset listan alkiot
+	 * yhden taaksepäin. Mikäli indeksi ei ole listan sisällä, antaa virheviestin.
 	 * 
 	 * @param i haluttu indeksi
 	 * 
@@ -64,7 +63,7 @@ public class LuolaLista {
 			throw new IndexOutOfBoundsException();
 		}
 	}
-	
+
 	/**
 	 * Hakee ja poistaa päällimmäisen alkion listasta
 	 * 
@@ -72,23 +71,24 @@ public class LuolaLista {
 	 * 
 	 */
 
-	public Luola haeJaPoistaPaallimmaisin() {
-		Luola palautettava = lista[indeksi - 1];
-		lista[indeksi - 1] = null;
-		indeksi--;
-		return palautettava;
+	public void poista(Alue alue) {
+		for (int i = 0; i < indeksi; i++) {
+			if (lista[i].equals(alue)) {
+				poista(i);
+			}
+		}
 	}
-	
+
 	/**
 	 * Tarkistaa, sisältääkö lista annettua luolaa
 	 * 
-	 * @param etsittava 
+	 * @param etsittava
 	 * 
 	 * @return totuusarvo true, jos sisältää, false, jos ei
 	 * 
 	 */
 
-	public boolean sisaltaa(Luola etsittava) {
+	public boolean sisaltaa(Alue etsittava) {
 		for (int i = 0; i < indeksi; i++) {
 			if (lista[i].equals(etsittava)) {
 				return true;
@@ -96,7 +96,7 @@ public class LuolaLista {
 		}
 		return false;
 	}
-	
+
 	/**
 	 * Tarkistaa onko lista tyhjä.
 	 * 
@@ -106,7 +106,7 @@ public class LuolaLista {
 	public boolean onTyhja() {
 		return indeksi == 0;
 	}
-	
+
 	/**
 	 * Tarkistaa onko lista täynnä
 	 * 
@@ -116,8 +116,7 @@ public class LuolaLista {
 	public boolean onTaynna() {
 		return indeksi == lista.length;
 	}
-	
-	
+
 	/**
 	 * Palauttaa listan koon eli alkioiden määrän listassa
 	 * 
@@ -132,25 +131,29 @@ public class LuolaLista {
 	 * Kasvattaa listan koon kaksinkertiaseksi
 	 * 
 	 */
-	
+
 	public void kasvata() {
-		Luola[] uusiLista = new Luola[indeksi * 2];
+		Alue[] uusiLista = new Alue[indeksi * 2];
 		for (int i = 0; i < indeksi; i++) {
 			uusiLista[i] = lista[i];
 		}
 		this.lista = uusiLista;
 	}
-	
+
 	/**
 	 * Tulostaa listan
 	 * 
 	 */
 
 	public void printtaa() {
-		System.out.print("[");
-		for (int i = 0; i < indeksi - 1; i++) {
-			System.out.print(lista[i] + ", ");
+		if (!onTyhja()) {
+			System.out.print("[");
+			for (int i = 0; i < indeksi - 1; i++) {
+				System.out.print(lista[i] + ", ");
+			}
+			System.out.println(lista[indeksi - 1] + "]");
+		} else {
+			System.out.println("Lista on tyhjä");
 		}
-		System.out.println(lista[indeksi - 1] + "]");
 	}
 }

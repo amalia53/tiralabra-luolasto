@@ -34,7 +34,7 @@ public class CAGeneraattori {
 		}
 		if (tarkistaLuolanOsuus(luolasto) < 0.4) {
 			generoi(koko);
-		}	
+		}
 		luolasto = teeYhtenaiseksi(luolasto);
 		return luolasto;
 	}
@@ -258,10 +258,10 @@ public class CAGeneraattori {
 	 * 
 	 * @param luolasto
 	 * 
-	 * @param alku      koordinantti yhdeistettävässä luolassa, josta etäisyydet
+	 * @param alku      koordinantti yhdistettävässä luolassa, josta etäisyydet
 	 *                  lasketaan muualle karttaan
 	 * 
-	 * @param vierailtu luolasto-matriisi, joihin uusi luola yhdistetään
+	 * @param vierailtu luolasto-matriisi, johon uusi luola yhdistetään
 	 *
 	 * @return luolasto-matriisi, jossa luola on yhdistetty
 	 */
@@ -375,16 +375,16 @@ public class CAGeneraattori {
 		}
 		return vierailtu;
 	}
-	
+
 	public float tarkistaLuolanOsuus(boolean[][] luolasto) {
-	float luolaa = 0;
-	for (int i = 0; i < luolasto.length; i++) {
-		for (int j = 0; j < luolasto.length; j++) {
-			if (!luolasto[i][j]) {
-				luolaa++;
+		float luolaa = 0;
+		for (int i = 0; i < luolasto.length; i++) {
+			for (int j = 0; j < luolasto.length; j++) {
+				if (!luolasto[i][j]) {
+					luolaa++;
+				}
 			}
 		}
+		return luolaa / (luolasto.length * luolasto.length);
 	}
-	return luolaa / (luolasto.length * luolasto.length);
-}
 }

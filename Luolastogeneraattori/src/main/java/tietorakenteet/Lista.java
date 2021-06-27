@@ -26,6 +26,21 @@ public class Lista {
 		lista[indeksi] = lisattava;
 		indeksi++;
 	}
+	
+	/**
+	 * Lisää listaan annetut neljä Koordinanttia ja kasvattaa indeksiä neljällä. Mikäli
+	 * lista on jo täysi, kasvattaa ensin listan kokoa.
+	 * 
+	 * @param lisattava koordinantti
+	 * 
+	 */
+	
+	public void lisaa(Koordinantti lisattava, Koordinantti lisattava2, Koordinantti lisattava3, Koordinantti lisattava4) {
+		lisaa(lisattava);
+		lisaa(lisattava2);
+		lisaa(lisattava3);
+		lisaa(lisattava4);
+	}
 
 	/**
 	 * Hakee annetusta indeksistä koordinantin ja palauttaa sen. Mikäli indeksi ei

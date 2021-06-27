@@ -3,35 +3,36 @@ package tietorakenteet;
 public class Luola {
 
 	private Satunnainen satunnainen = new Satunnainen();
-	private int minKoko;
+	private int minLeveys, minKorkeus, maxLeveys, maxKorkeus;
 	private int korkeus, leveys;
 	private int x, y;
-	private Luola vasen, oikea, sisar;
+	private int kaytavia;
 
-	public Luola(int x, int y, int korkeus, int leveys, int minKoko) {
-		this.x = x;
-		this.y = y;
-		this.korkeus = korkeus;
-		this.leveys = leveys;
-		this.minKoko = minKoko;
+	public boolean[][] luoLuola(boolean[][] luolasto, int x, int y, int leveys, int korkeus) {
+		minLeveys = leveys / 3 + leveys / 6;
+		minKorkeus = korkeus / 3 + korkeus / 6;
+		maxLeveys = leveys - 1;
+		maxKorkeus = korkeus - 1;
+		if (minLeveys < 3) {
+			minLeveys = maxLeveys;
+		}
+		if (minKorkeus < 3) {
+			minKorkeus = maxKorkeus;
+		}
+		this.leveys = satunnainen.kokonaislukuValilta(minLeveys, maxLeveys);
+		this.korkeus = satunnainen.kokonaislukuValilta(minKorkeus, maxKorkeus);
+		this.x = x + satunnainen.kokonaislukuValilta(1, leveys - this.leveys);
+		this.y = y + satunnainen.kokonaislukuValilta(1, korkeus - this.korkeus);
+		for (int i = x; i < x + leveys; i++) {
+			for (int j = y; j < y + korkeus; j++) {
+				if (i < this.x || i >= this.x + this.leveys || j < this.y || j >= this.y + this.korkeus) {
+					luolasto[i][j] = true;
+				}
+			}
+		}
+		return luolasto;
 	}
-
-	public Luola getVasen() {
-		return vasen;
-	}
-
-	public Luola getOikea() {
-		return oikea;
-	}
-
-	public void setSisar(Luola sisar) {
-		this.sisar = sisar;
-	}
-
-	public Luola getSisar() {
-		return sisar;
-	}
-
+	
 	public int getX() {
 		return x;
 	}
@@ -40,45 +41,20 @@ public class Luola {
 		return y;
 	}
 
-	/**
-	 * Jakaa luola-alueen kahteen pienempään luola-alueeseen, mikäli luola-alue ei
-	 * ole jo tarpeeksi pieni. Satunnaisesti jakaa joko vaakasuunnassa tai
-	 * pystysuunnassa satunnaisen kokoisiksi alueiksi.
-	 *
-	 * @return true, jos pystyttiin jakamaan kahtia; false, jos ei voi enää jakaa
-	 *         pienemmiksi.
-	 */
+	public int getLoppuX() {
+		return x + leveys - 1;
+	}
 
-	public boolean jaaAlue() {
-		boolean vaakataso;
-		if (leveys / 2 >= minKoko || korkeus / 2 >= minKoko) {
-			vaakataso = satunnainen.totuusarvo();
-			if (leveys / 2 < minKoko) {
-				vaakataso = true;
-			}
-			if (korkeus / 2 < minKoko) {
-				vaakataso = false;
-			}
-		} else {
-			return false;
-		}
-		int pituus = vaakataso ? korkeus : leveys;
-		int leikkaus;
-		if (pituus - minKoko - minKoko == 0) {
-			leikkaus = minKoko;
-		} else {
-			leikkaus = satunnainen.kokonaislukuValilta(minKoko, pituus);
-		}
-		if (vaakataso) {
-			vasen = new Luola(x, y, leikkaus, leveys, minKoko);
-			oikea = new Luola(x, y + leikkaus, korkeus - leikkaus, leveys, minKoko);
-		} else {
-			vasen = new Luola(x, y, korkeus, leikkaus, minKoko);
-			oikea = new Luola(x + leikkaus, y, korkeus, leveys - leikkaus, minKoko);
-		}
-		vasen.setSisar(oikea);
-		oikea.setSisar(vasen);
-		return true;
+	public int getLoppuY() {
+		return y + korkeus - 1;
+	}
+
+	public int kaytavienMaara() {
+		return kaytavia;
+	}
+	
+	public void lisaaKaytava() {
+		kaytavia++;
 	}
 
 	/**
@@ -90,23 +66,8 @@ public class Luola {
 	 * @return luolasto, jossa lisättynä luola
 	 */
 
-	public boolean[][] luoLuola(boolean[][] luolasto) {
-		int minLeveys = this.leveys / 3;
-		int minKorkeus = this.leveys / 3;
-		int maxLeveys = this.leveys - 1;
-		int maxKorkeus = this.korkeus - 1;
-		int leveys = satunnainen.kokonaislukuValilta(minLeveys, maxLeveys);
-		int korkeus = satunnainen.kokonaislukuValilta(minKorkeus, maxKorkeus);
-		int alkuX = this.x + satunnainen.kokonaisluku(this.leveys - leveys);
-		int alkuY = this.y + satunnainen.kokonaisluku(this.korkeus - korkeus);
-		for (int x = this.x; x < this.x + this.leveys; x++) {
-			for (int y = this.y; y < this.y + this.korkeus; y++) {
-				if (x < alkuX || x >= alkuX + leveys || y < alkuY || y >= alkuY + korkeus) {
-					luolasto[x][y] = true;
-				}
-			}
-		}
-		return luolasto;
+	public String toString() {
+		return "(" + this.x + "," + this.y + "), " + this.leveys + " x " + this.korkeus;
 	}
 
 }

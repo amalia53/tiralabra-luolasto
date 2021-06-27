@@ -53,10 +53,8 @@ public class Koordinantti {
 	public boolean onSamaKuin(Koordinantti verrattava) {
 		return (this.x == verrattava.x && this.y == verrattava.y);
 	}
-
-	@Override
-	public String toString() {
-		return "Koordinantti (" + x + ", " + y + ")";
+	
+	public boolean onSeina(boolean[][] luolasto) {
+		return x < 0 || y < 0 || x >= luolasto.length || y >= luolasto.length || luolasto[x][y];
 	}
-
 }
