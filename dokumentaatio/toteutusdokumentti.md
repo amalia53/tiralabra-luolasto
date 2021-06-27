@@ -25,6 +25,8 @@ Tietorakenteet-pakkauksesta löytyy
 - Etaisyys-tietorakenne, jossa tallessa koordinantti ja sen etäisyys
 - Randomia muistuttava oma Satunnainen-toteutus
 
+##
+
 ## Puutteet ja parannusideat
 
 - BSP:n ja Luola-tietorakenteen testaus
@@ -32,3 +34,9 @@ Tietorakenteet-pakkauksesta löytyy
 - BSP:n tunnelien luomisen koodin refaktorointi
 - Suurempien karttojen tekemien mahdollisuus: StakOverFlown välttäminen yhtenäisyyden tarkisuksessa
 - Satunnainen-luookassa parempi metodi todennäköisyydelle, jolla saataisiin CA-generaattorin luolan alustus toimimaan yhtä siististi kuin Random-luokalla, jota päädyin käyttämään. Omalla luolastot näyttivät huonommalta
+
+## Lähteet
+
+[http://roguebasin.roguelikedevelopment.org/index.php?title=Cellular_Automata_Method_for_Generating_Random_Cave-Like_Levels](http://roguebasin.roguelikedevelopment.org/index.php?title=Cellular_Automata_Method_for_Generating_Random_Cave-Like_Levels)
+[https://gamedevelopment.tutsplus.com/tutorials/generate-random-cave-levels-using-cellular-automata--gamedev-9664](https://gamedevelopment.tutsplus.com/tutorials/generate-random-cave-levels-using-cellular-automata--gamedev-9664)
+[https://eskerda.com/bsp-dungeon-generation/](https://eskerda.com/bsp-dungeon-generation/)
