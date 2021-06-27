@@ -25,10 +25,13 @@ Tietorakenteet-pakkauksesta löytyy
 - Etaisyys-tietorakenne, jossa tallessa koordinantti ja sen etäisyys
 - Randomia muistuttava oma Satunnainen-toteutus
 
-##
+## Suorituskyky
+
+Ohjelma ajetaan ja 120 kokoiset kartat luodaan 5 sekunnissa.
 
 ## Puutteet ja parannusideat
 
+- Aika -ja tilavaatimusten tutkiminen
 - BSP:n ja Luola-tietorakenteen testaus
 - BSP:n tunnelien luominen niin, ettei samoja luolia yhdistettäisi toisiinsa vaan saataisiin paremman näköinen tunneliverkosto
 - BSP:n tunnelien luomisen koodin refaktorointi
