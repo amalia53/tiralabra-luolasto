@@ -33,10 +33,11 @@ Ohjelma ajetaan ja 120 kokoiset kartat luodaan 5 sekunnissa.
 
 - Aika -ja tilavaatimusten tutkiminen
 - BSP:n ja Luola-tietorakenteen testaus
-- BSP:n tunnelien luominen niin, ettei samoja luolia yhdistettäisi toisiinsa vaan saataisiin paremman näköinen tunneliverkosto
+- BSP:n tunnelien luominen niin, ettei samoja luolia yhdistettäisi toisiinsa vaan saataisiin paremman näköinen tunneliverkosto. Tämän voisi toteuttaa simerkiki luolan luonnin yhteydessä päätetyillä ovilla
+- BSP-tunnelit tulevat todennäköisemmin pystysuuntaisina, sillä tunnelin luonti lopetetaan, jos törmätään tunneliin tai luolaan, ja mutkittelevien tunnelien luonti aloitetaan pystysuuntaisista. Tässä voisi luoda ainakin satunnaisen aloituksen joko pysty- tai vaakasuunnassa.
 - BSP:n tunnelien luomisen koodin refaktorointi
 - Suurempien karttojen tekemien mahdollisuus: StakOverFlown välttäminen yhtenäisyyden tarkisuksessa
-- Satunnainen-luookassa parempi metodi todennäköisyydelle, jolla saataisiin CA-generaattorin luolan alustus toimimaan yhtä siististi kuin Random-luokalla, jota päädyin käyttämään. Omalla luolastot näyttivät huonommalta
+- Satunnainen-luokassa parempi metodi todennäköisyydelle, jolla saataisiin CA-generaattorin luolan alustus toimimaan yhtä siististi kuin Random-luokalla, jota päädyin käyttämään. Omalla luolastot näyttivät huonommalta
 
 ## Lähteet
 
