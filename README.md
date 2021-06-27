@@ -28,4 +28,6 @@
 
 [Testausdokumentti](https://github.com/amalia53/tiralabra-luolasto/blob/main/dokumentaatio/testausdokumentti.md)
 
+[Käyttöohje](https://github.com/amalia53/tiralabra-luolasto/blob/main/dokumentaatio/manual.md)
+
 
