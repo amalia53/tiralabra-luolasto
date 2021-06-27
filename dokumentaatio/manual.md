@@ -1,6 +1,6 @@
 # Käyttöohje
 
-Lataa jar-tiedosto ja suorita se. 
+Lataa jar-tiedosto releasesta ja suorita se. 
 
 Ohjelma kysyy syötteenä luolaston kokoa, joka saa olla kokonaisluku numeroiden 20 - 120 väliltä.
 
