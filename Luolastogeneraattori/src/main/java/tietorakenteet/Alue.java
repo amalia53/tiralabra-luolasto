@@ -16,26 +16,6 @@ public class Alue {
 		this.leveys = leveys;
 	}
 
-	public Alue getVasen() {
-		return vasen;
-	}
-
-	public Alue getOikea() {
-		return oikea;
-	}
-
-	public int getX() {
-		return x;
-	}
-
-	public int getY() {
-		return y;
-	}
-
-	public Luola getLuola() {
-		return luola;
-	}
-
 	/**
 	 * Jakaa luola-alueen kahteen pienempään luola-alueeseen, mikäli luola-alue ei
 	 * ole jo tarpeeksi pieni. Satunnaisesti jakaa joko vaakasuunnassa tai
@@ -59,7 +39,7 @@ public class Alue {
 			return false;
 		}
 		int pituus = vaakataso ? korkeus : leveys;
-		int leikkaus = satunnainen.kokonaislukuValilta(minKoko, pituus-minKoko);
+		int leikkaus = satunnainen.kokonaislukuValilta(minKoko, pituus - minKoko);
 		if (vaakataso) {
 			vasen = new Alue(x, y, leikkaus, leveys);
 			oikea = new Alue(x, y + leikkaus, korkeus - leikkaus, leveys);
@@ -69,7 +49,7 @@ public class Alue {
 		}
 		return true;
 	}
-	
+
 	/**
 	 * Luo satunnaisen kokoisen luolan alueen sisälle
 	 * 
@@ -77,14 +57,29 @@ public class Alue {
 	 *
 	 * @return luolasto-matriisi, jossa uusi luola
 	 */
-	
+
 	public boolean[][] luoLuola(boolean[][] luolasto) {
 		this.luola = new Luola();
 		return this.luola.luoLuola(luolasto, x, y, leveys, korkeus);
 	}
 
-	public String toString() {
-		return "(" + this.x + "," + this.y + "), " + this.leveys + " x " + this.korkeus;
+	public Alue getVasen() {
+		return vasen;
 	}
 
+	public Alue getOikea() {
+		return oikea;
+	}
+
+	public int getX() {
+		return x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public Luola getLuola() {
+		return luola;
+	}
 }

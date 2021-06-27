@@ -12,10 +12,10 @@ public class LuolaLista {
 	}
 
 	/**
-	 * Lisää listaan annetun Luolan ja kasvattaa indeksiä yhdellä. Mikäli lista on
+	 * Lisää listaan annetun Luolan alueen ja kasvattaa indeksiä yhdellä. Mikäli lista on
 	 * jo täysi, kasvattaa ensin listan kokoa.
 	 * 
-	 * @param lisattava luola
+	 * @param lisattava luolan alue
 	 * 
 	 */
 
@@ -28,12 +28,12 @@ public class LuolaLista {
 	}
 
 	/**
-	 * Hakee annetusta indeksistä luolan ja palauttaa sen. Mikäli indeksi ei ole
+	 * Hakee annetusta indeksistä luolan alueen ja palauttaa sen. Mikäli indeksi ei ole
 	 * listan sisällä, antaa virheviestin.
 	 * 
 	 * @param i haluttu indeksi
 	 * 
-	 * @return pyydetty luola
+	 * @return pyydetty luolan alue
 	 */
 
 	public Alue hae(int i) {
@@ -45,7 +45,7 @@ public class LuolaLista {
 	}
 
 	/**
-	 * Poistaa annetusta indeksistä luolan ja siirtää sen jälkeiset listan alkiot
+	 * Poistaa annetusta indeksistä luolan alue ja siirtää sen jälkeiset listan alkiot
 	 * yhden taaksepäin. Mikäli indeksi ei ole listan sisällä, antaa virheviestin.
 	 * 
 	 * @param i haluttu indeksi
@@ -67,7 +67,7 @@ public class LuolaLista {
 	/**
 	 * Hakee ja poistaa päällimmäisen alkion listasta
 	 * 
-	 * @return päällimmäisin luola
+	 * @return päällimmäisin luolan alue
 	 * 
 	 */
 
@@ -80,7 +80,7 @@ public class LuolaLista {
 	}
 
 	/**
-	 * Tarkistaa, sisältääkö lista annettua luolaa
+	 * Tarkistaa, sisältääkö lista annettua luolan aluetta
 	 * 
 	 * @param etsittava
 	 * 
@@ -110,7 +110,7 @@ public class LuolaLista {
 	/**
 	 * Tarkistaa onko lista täynnä
 	 * 
-	 * @return totuusatrvo true, jos lista on täynnä, false, jos on vielä tilaa
+	 * @return totuusarvo true, jos lista on täynnä, false, jos on vielä tilaa
 	 */
 
 	public boolean onTaynna() {
@@ -138,22 +138,5 @@ public class LuolaLista {
 			uusiLista[i] = lista[i];
 		}
 		this.lista = uusiLista;
-	}
-
-	/**
-	 * Tulostaa listan
-	 * 
-	 */
-
-	public void printtaa() {
-		if (!onTyhja()) {
-			System.out.print("[");
-			for (int i = 0; i < indeksi - 1; i++) {
-				System.out.print(lista[i] + ", ");
-			}
-			System.out.println(lista[indeksi - 1] + "]");
-		} else {
-			System.out.println("Lista on tyhjä");
-		}
 	}
 }

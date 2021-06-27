@@ -357,7 +357,7 @@ public class CAGeneraattori {
 	 * 
 	 * @param luolasto
 	 * 
-	 *                              osat
+	 * @param vierailtu matriisi, johon lisätään löydetty luolaston osa
 	 * 
 	 * @param vierailtuKierroksella tällä kierroksella löydetty luolaston osa
 	 *
@@ -375,6 +375,15 @@ public class CAGeneraattori {
 		}
 		return vierailtu;
 	}
+	
+
+	/**
+	 * Lasketaan kuinka suuri osa luolastosta on luolaa (eikä seinää)
+	 * 
+	 * @param luolasto
+	 * 
+	 * @return osuus, joka luolastosta on luolaa
+	 */
 
 	public float tarkistaLuolanOsuus(boolean[][] luolasto) {
 		float luolaa = 0;

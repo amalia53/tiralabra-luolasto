@@ -115,24 +115,37 @@ public class BSPGeneraattori {
 		}
 	}
 
+	/**
+	 * Tarkistaa, onko luolasto yhtenäinen, ja jos ei, niin luo tunnelin erillisten
+	 * luolastojen välille. Luolasto on yhtenäinen, mikäli ei löydy vierailematonta
+	 * koordinanttia.
+	 * 
+	 * @param luolasto
+	 *
+	 */
+
 	public void teeYhtenaiseksi(boolean[][] luolasto) {
 		boolean[][] vierailtu = new boolean[luolasto.length][luolasto.length];
-		Koordinantti aloitus1 = haeAloitus(luolasto, vierailtu);
-		tarkistaYhtenaisyys(luolasto, vierailtu, aloitus1);
-		Koordinantti aloitus2 = haeAloitus(luolasto, vierailtu);
-		boolean yhtenainen = aloitus2 == null;
+		Koordinantti aloitus = haeAloitus(luolasto, vierailtu);
+		tarkistaYhtenaisyys(luolasto, vierailtu, aloitus);
+		aloitus = haeAloitus(luolasto, vierailtu);
+		boolean yhtenainen = aloitus == null;
 		while (!yhtenainen) {
-			Alue alue = haeLuolaKoordinantissa(aloitus2, lista);
-			if (vierailtuPienemmallaAlueella(luolasto, vierailtu)) {
-				alue = haeLuolaKoordinantissa(aloitus1, lista);
-			}
+			Alue alue = haeLuolaKoordinantissa(aloitus, lista);
 			luoTunneli(alue);
 			vierailtu = new boolean[luolasto.length][luolasto.length];
-			tarkistaYhtenaisyys(luolasto, vierailtu, aloitus1);
-			aloitus2 = haeAloitus(luolasto, vierailtu);
-			yhtenainen = aloitus2 == null;
+			tarkistaYhtenaisyys(luolasto, vierailtu, aloitus);
+			aloitus = haeAloitus(luolasto, vierailtu);
+			yhtenainen = aloitus == null;
 		}
 	}
+
+	/**
+	 * Luo tunnelin lähtien annetun alueen luolasta satunnaiseen toiseen luolaan.
+	 * 
+	 * @param Alue alue, jonka luolasta tunnelin pitää lähteä
+	 *
+	 */
 
 	public void luoTunneli(Alue alue) {
 		Alue yhdistettavaAlue = lista.hae(satunnainen.kokonaisluku(lista.koko() - 1));
@@ -289,6 +302,18 @@ public class BSPGeneraattori {
 		}
 	}
 
+	/**
+	 * Luodaan vierailtu-matriisi, joka kertoo, mihin luolaston osiin pääsee
+	 * aloituskoordinantista yhtenäisyyden tarkistamiseksi.
+	 * 
+	 * @param luolasto
+	 * 
+	 * @param vierailtu    Matriisi, joka kertoo, missä luolaston osissa on haun
+	 *                     aikana vierailtu
+	 *
+	 * @param koordinantti Koordinantti, jota tarkistetaan
+	 */
+
 	public void tarkistaYhtenaisyys(boolean[][] luolasto, boolean[][] vierailtu, Koordinantti koordinantti) {
 		vierailtu[koordinantti.getX()][koordinantti.getY()] = true;
 		Lista kutsuttavat = koordinantti.haeNaapurit(luolasto.length);
@@ -300,9 +325,17 @@ public class BSPGeneraattori {
 		}
 	}
 
-//	public boolean onkoYhtenainen(boolean[][] luolasto, boolean[][] vierailtu) {
-//		return haeAloitus(luolasto, vierailtu) == null;
-//	}
+	/**
+	 * Haetaan koordinantti luolastosta, joka on luolaa ja jossa ei olla vielä
+	 * vierailtu. Palautetaan null, jos kaikkialla on vierailtu ja luolasto on
+	 * yhtenäinen.
+	 * 
+	 * @param luolasto
+	 * 
+	 * @param vierailtu Matriisi, joka kertoo, missä luolaston osissa on vierailtu
+	 * 
+	 * @return Luolan koordinantti, jossa ei vielä vierailtu
+	 */
 
 	public Koordinantti haeAloitus(boolean[][] luolasto, boolean[][] vierailtu) {
 		for (int x = 0; x < luolasto.length; x++) {
@@ -315,6 +348,18 @@ public class BSPGeneraattori {
 		return null;
 	}
 
+	/**
+	 * Haetaan alue listasta, jonka luola alkaa annetusta koordinantista. Palauttaa
+	 * null, jos koordinantista ei löydy aluetta, mutta tähän ei koodissa pitäisi
+	 * ikinä joutua.
+	 * 
+	 * @param koordinantti
+	 * 
+	 * @param lista        Lista, jossa kaikki luolalliset alueet
+	 *
+	 * @return Alue, jonka luola alkaa annetusta koordinantista.
+	 */
+
 	public Alue haeLuolaKoordinantissa(Koordinantti koordinantti, LuolaLista lista) {
 		for (int i = 0; i < lista.koko(); i++) {
 			if (lista.hae(i).getLuola().getX() == koordinantti.getX()
@@ -323,55 +368,5 @@ public class BSPGeneraattori {
 			}
 		}
 		return null;
-	}
-
-	public Koordinantti haeVierailtu(boolean[][] vierailtu) {
-		for (int i = 0; i < vierailtu.length; i++) {
-			for (int j = 0; j < vierailtu.length; j++) {
-				if (vierailtu[i][j]) {
-					return new Koordinantti(i, j);
-				}
-			}
-		}
-		return null;
-	}
-
-	public boolean vierailtuPienemmallaAlueella(boolean[][] luolasto, boolean[][] vierailtu) {
-		int luolastossa = 0;
-		int vieraillussa = 0;
-		for (int i = 0; i < luolasto.length; i++) {
-			for (int j = 0; j < luolasto.length; j++) {
-				if (!luolasto[i][j]) {
-					luolastossa++;
-				}
-				if (vierailtu[i][j]) {
-					vieraillussa++;
-				}
-			}
-		}
-		return (luolastossa - vieraillussa) > vieraillussa;
-	}
-
-	public void tulosta(boolean[][] luolasto) {
-		System.out.println();
-		for (int i = 0; i < luolasto.length + 2; i++) {
-			System.out.print("-");
-		}
-		for (int x = 0; x < luolasto.length; x++) {
-			System.out.println();
-			System.out.print("|");
-			for (int y = 0; y < luolasto.length; y++) {
-				if (luolasto[x][y]) {
-					System.out.print("*");
-				} else {
-					System.out.print(" ");
-				}
-			}
-			System.out.print("|");
-		}
-		System.out.println();
-		for (int i = 0; i < luolasto.length + 2; i++) {
-			System.out.print("-");
-		}
 	}
 }

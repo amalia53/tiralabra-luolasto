@@ -28,9 +28,9 @@ public class TekstiUI {
 		int koko = kysyKoko();
 		CAGeneraattori ca = new CAGeneraattori();
 		BSPGeneraattori bsp = new BSPGeneraattori();
-//		boolean[][] luolastoCA = ca.generoi(koko);
+		boolean[][] luolastoCA = ca.generoi(koko);
 		boolean[][] luolastoBSP = bsp.generoi(koko);
-//		tulosta(luolastoCA);
+		tulosta(luolastoCA);
 		System.out.println();
 		System.out.println();
 		System.out.println();
@@ -47,48 +47,21 @@ public class TekstiUI {
 	 */
 
 	public int kysyKoko() {
-		System.out.print("Anna luolaston koko: ");
+		System.out.print("Anna luolaston koko (20-120): ");
 		if (lukija.hasNextInt()) {
 			int koko = lukija.nextInt();
-			if (koko > 0) {
+			if (koko >= 20 && koko <= 120) {
 				return koko;
 			} else {
-				System.out.println("Syötä positiivinen kokonaisluku");
+				System.out.println("Syötä kokonaisluku välillä 20 - 120");
 				return kysyKoko();
 			}
 		} else {
 			lukija.next();
-			System.out.println("Syötä positiivinen kokonaisluku");
+			System.out.println("Syötä positiivinen kokonaisluku välillä 20 - 120");
 			return kysyKoko();
 		}
 	}
-	
-
-	/**
-	 * Kysytään käyttäjältä luolaston kokoa. Mikäli käyttäjä syöttää positiivisen
-	 * kokonaisluvun, palautetaan syötetty luku. Mikäli käyttäjä syöttää
-	 * negatiivisen luvun, nollan tai ei-luvun, palautetaan virheilmoitus
-	 * "Syötä positiivinen kokonaisluku" ja kutsutaan metodia uudelleen.
-	 * 
-	 * @return koko
-	 */
-//
-//	public int kysyPieninLuolanKoko() {
-//		System.out.print("Anna pienimmän luolan koko: ");
-//		if (lukija.hasNextInt()) {
-//			int koko = lukija.nextInt();
-//			if (koko > 0) {
-//				return koko;
-//			} else {
-//				System.out.println("Syötä positiivinen kokonaisluku");
-//				return kysyPieninLuolanKoko();
-//			}
-//		} else {
-//			lukija.next();
-//			System.out.println("Syötä positiivinen kokonaisluku");
-//			return kysyPieninLuolanKoko();
-//		}
-//	}
 	
 	/**
 	 * Tulostetaan parametrina annettu matriisi. Seinät näytetään tähtinä, luolat tyhjinä ja luolasto on rajattu viivoin.

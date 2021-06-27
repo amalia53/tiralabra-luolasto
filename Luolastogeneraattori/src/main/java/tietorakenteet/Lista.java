@@ -159,17 +159,4 @@ public class Lista {
 	public Koordinantti[] getLista() {
 		return lista;
 	}
-
-	/**
-	 * Tulostaa listan
-	 * 
-	 */
-
-	public void printtaa() {
-		System.out.print("[");
-		for (int i = 0; i < indeksi - 1; i++) {
-			System.out.print(lista[i] + ", ");
-		}
-		System.out.println(lista[indeksi - 1] + "]");
-	}
 }

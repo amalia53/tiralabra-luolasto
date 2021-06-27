@@ -8,6 +8,15 @@ public class Luola {
 	private int x, y;
 	private int kaytavia;
 
+	/**
+	 * Luo luola-alueen sisään mahtuvan, satunnaisen kokoisen luolan satunnaiseen
+	 * kohtaan aluetta. Lisää luodun luolan annettuun luolasto-matriisiin.
+	 *
+	 * @param luolasto
+	 * 
+	 * @return luolasto, jossa lisättynä luola alueelle
+	 */
+	
 	public boolean[][] luoLuola(boolean[][] luolasto, int x, int y, int leveys, int korkeus) {
 		minLeveys = leveys / 3 + leveys / 6;
 		minKorkeus = korkeus / 3 + korkeus / 6;
@@ -56,18 +65,4 @@ public class Luola {
 	public void lisaaKaytava() {
 		kaytavia++;
 	}
-
-	/**
-	 * Luo luola-alueen sisään mahtuvan satunnaisen kokoisen luolan satunnaiseen
-	 * kohtaan aluetta. Lisää luodun luolan annettuun luolastoon.
-	 *
-	 * @param luolasto
-	 * 
-	 * @return luolasto, jossa lisättynä luola
-	 */
-
-	public String toString() {
-		return "(" + this.x + "," + this.y + "), " + this.leveys + " x " + this.korkeus;
-	}
-
 }
